@@ -1,0 +1,57 @@
+{
+  "name": "Agilify Editorial Design System - Light Edition",
+  "version": "2.0.0",
+  "author": "Alessandro Silva Cardoso, Enzo Impieri Danner, João Paulo Lira Bezerra Silva - SENAC 2026",
+  "description": "Design tokens para o tema editorial claro do Agilify (compatível com Tokens Studio e Figma Variables)",
+  "color": {
+    "page": {
+      "background": { "value": "#FFFFFF", "type": "color" },
+      "surface": { "value": "#F8FAFC", "type": "color" },
+      "surfaceMuted": { "value": "#F1F5F9", "type": "color" }
+    },
+    "border": {
+      "light": { "value": "#E2E8F0", "type": "color" },
+      "medium": { "value": "#CBD5E1", "type": "color" },
+      "dark": { "value": "#94A3B8", "type": "color" }
+    },
+    "text": {
+      "primary": { "value": "#0F172A", "type": "color" },
+      "secondary": { "value": "#334155", "type": "color" },
+      "muted": { "value": "#64748B", "type": "color" },
+      "subtle": { "value": "#94A3B8", "type": "color" }
+    },
+    "brand": {
+      "primary": { "value": "#4F46E5", "type": "color", "description": "Índigo/Cobalto profissional" },
+      "primaryHover": { "value": "#4338CA", "type": "color" },
+      "primaryLight": { "value": "#EEF2FF", "type": "color" },
+      "dark": { "value": "#0F172A", "type": "color" }
+    },
+    "semantic": {
+      "successDark": { "value": "#065F46", "type": "color" },
+      "successLight": { "value": "#ECFDF5", "type": "color" },
+      "warningDark": { "value": "#92400E", "type": "color" },
+      "warningLight": { "value": "#FFFBEB", "type": "color" }
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "body": { "value": "'Plus Jakarta Sans', system-ui, sans-serif", "type": "fontFamilies" },
+      "heading": { "value": "'Space Grotesk', 'Plus Jakarta Sans', sans-serif", "type": "fontFamilies" }
+    },
+    "fontSize": {
+      "xs": { "value": "11px", "type": "fontSizes" },
+      "sm": { "value": "13px", "type": "fontSizes" },
+      "base": { "value": "15px", "type": "fontSizes" },
+      "lg": { "value": "18px", "type": "fontSizes" },
+      "xl": { "value": "22px", "type": "fontSizes" },
+      "2xl": { "value": "28px", "type": "fontSizes" },
+      "3xl": { "value": "38px", "type": "fontSizes" }
+    }
+  },
+  "borderRadius": {
+    "xs": { "value": "4px", "type": "borderRadius" },
+    "sm": { "value": "6px", "type": "borderRadius" },
+    "md": { "value": "8px", "type": "borderRadius" },
+    "lg": { "value": "12px", "type": "borderRadius" }
+  }
+}
