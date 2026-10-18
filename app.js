@@ -357,7 +357,7 @@ function ensureArtistProfile(handle, extras = {}) {
   if (!ARTIST_PROFILES[handle]) {
     ARTIST_PROFILES[handle] = {
       city: extras.city || "Brasil",
-      bio: extras.bio || "Artista independente na vitrine Agilify.",
+      bio: extras.bio || "Artista independente na vitrine Artesio.",
       technique: extras.technique || "Digital",
       turnaround: extras.turnaround || "7 dias úteis"
     };
@@ -674,7 +674,7 @@ function applyUserSession(user, options = {}) {
 
   const studioBioInput = document.getElementById("studioBioInput");
   if (studioBioInput && user.role === "artist") {
-    studioBioInput.value = `https://agilify.com.br/${user.handle}/vitrine`;
+    studioBioInput.value = `https://artesio.com.br/${user.handle}/vitrine`;
   }
 
   updateSessionUI();
@@ -1914,7 +1914,7 @@ window.filterByReadyItems = function() {
 };
 
 window.scrollToHowItWorks = function() {
-  showToast("O Agilify protege o pagamento em custódia Pix e verifica a autoria humana sem cobrar taxas do artista.");
+  showToast("O Artesio protege o pagamento em custódia Pix e verifica a autoria humana sem cobrar taxas do artista.");
 };
 
 window.onSortChange = function(val) {
@@ -2284,13 +2284,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Figma Modal
-  const figmaModal = document.getElementById("figmaModal");
-  const openFigmaModalBtn = document.getElementById("openFigmaModalBtn");
-  const closeFigmaModal = document.getElementById("closeFigmaModal");
-  const btnCloseFigmaModal2 = document.getElementById("btnCloseFigmaModal2");
-
-  if (openFigmaModalBtn) openFigmaModalBtn.addEventListener("click", () => { figmaModal.style.display = "flex"; });
-  if (closeFigmaModal) closeFigmaModal.addEventListener("click", () => { figmaModal.style.display = "none"; });
-  if (btnCloseFigmaModal2) btnCloseFigmaModal2.addEventListener("click", () => { figmaModal.style.display = "none"; });
 });
