@@ -590,6 +590,18 @@ window.switchView = function(viewName) {
     openChatApp();
   } else if (viewName === "artistProfile") {
     renderArtistProfile(AppState.selectedArtistHandle);
+  } else if (viewName === "cart") {
+    const navCart = document.getElementById("navCartBtn");
+    if (navCart) navCart.classList.add("active");
+    if (window.renderCartView) window.renderCartView();
+  } else if (viewName === "plans") {
+    const navPlans = document.getElementById("navPlansBtn");
+    if (navPlans) navPlans.classList.add("active");
+  } else if (viewName === "newTalents") {
+    const navNT = document.getElementById("navNewTalentsBtn");
+    if (navNT) navNT.classList.add("active");
+  } else if (viewName === "favorites") {
+    if (window.renderFavoritesView) window.renderFavoritesView();
   }
 
   window.scrollTo({ top: 0, behavior: "smooth" });

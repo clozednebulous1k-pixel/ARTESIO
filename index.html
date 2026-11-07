@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles-30-telas.css">
 </head>
 <body>
 
@@ -32,6 +33,9 @@
 
         <nav class="nav-menu">
           <button class="nav-link active" id="navCommissionBtn" onclick="switchView('marketplace')">Vitrine de Artes</button>
+          <button class="nav-link" id="navNewTalentsBtn" onclick="switchView('newTalents')">Novos Talentos</button>
+          <button class="nav-link" id="navPlansBtn" onclick="switchView('plans')">Planos & Preços</button>
+          <button class="nav-link" id="navCartBtn" onclick="switchView('cart')">Carrinho</button>
           <button class="nav-link" id="navArtistBtn" onclick="switchView('artist')" style="display:none;">Portal do Artista</button>
           <button class="nav-link" id="navClientBtn" onclick="switchView('client')" style="display:none;">Área do Cliente</button>
           <button class="nav-link" id="navChatsBtn" onclick="switchView('chats')" style="display:none;">Conversas</button>
@@ -67,6 +71,7 @@
               <button type="button" class="user-dropdown-item" id="menuViewProfile">Ver perfil</button>
               <button type="button" class="user-dropdown-item" id="menuEditProfile">Editar perfil</button>
               <button type="button" class="user-dropdown-item" id="menuAddArt">Adicionar arte</button>
+              <button type="button" class="user-dropdown-item" id="menuFavorites" onclick="switchView('favorites')">Meus Favoritos</button>
               <button type="button" class="user-dropdown-item" id="menuSettings">Configurações</button>
               <button type="button" class="user-dropdown-item danger" id="menuLogout">Sair</button>
             </div>
@@ -556,6 +561,1277 @@
   </section>
 
   <!-- ================= FOOTER ================= -->
+    <!-- ================= TELA 03: DESCUBRA NOVOS TALENTOS (FUTURO) ================= -->
+  <section class="app-view" id="viewNewTalents" style="display:none;">
+    <div class="container view-container">
+      <div class="screen-header-badge-row">
+        <span class="screen-badge-id">TELA 03 • EXPLORAÇÃO</span>
+        <span class="screen-badge-scope badge-scope-future">○ Protótipo Navegável — Funcionalidade Futura</span>
+      </div>
+      <div class="view-header-row">
+        <div>
+          <span class="section-kicker">DESCOBERTA INDEPENDENTE</span>
+          <h2 class="view-title">Descubra Novos Talentos</h2>
+          <p class="view-desc">Espaço dedicado para expor artistas recém-chegados ou ainda pouco avaliados, independente do plano pago, sem algoritmo opaco ou métricas de popularidade.</p>
+          <div class="screen-req-tags">
+            <span class="req-tag">RF03, RF12 (parcial)</span>
+            <span class="req-tag rn">RN03 (parcial)</span>
+            <span class="req-tag rnf">RNF01, RNF04</span>
+          </div>
+        </div>
+        <div class="header-action">
+          <button class="btn-secondary" onclick="switchView('marketplace')">← Voltar à Vitrine</button>
+        </div>
+      </div>
+
+      <div class="bio-banner-box" style="margin-bottom:24px;">
+        <div class="bio-banner-text">
+          <h4 style="color:#B45309;">Nota de Planejamento Acadêmico (RN03)</h4>
+          <p>Artistas exibidos aqui são selecionados com base no critério de entrada recente ou até 5 pedidos realizados, garantindo oportunidade igualitária sem ranqueamento por curtidas.</p>
+        </div>
+      </div>
+
+      <div class="vgen-cards-grid" id="newTalentsGrid">
+        <div class="vgen-card">
+          <div class="card-media" style="background:#F0FDF4; height:180px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+            <div class="avatar-circle" style="width:54px; height:54px; font-size:1.3rem;">B</div>
+            <strong style="margin-top:10px; color:#1E293B;">Beatriz Ramos</strong>
+            <small style="color:#64748B;">@beatriz_aquarela</small>
+          </div>
+          <div class="card-content" style="padding:16px;">
+            <span class="badge-neutral">Novo Artista • Cadastrado há 5 dias</span>
+            <p style="font-size:0.85rem; color:#475569; margin:10px 0;">Especialista em aquarela botânica tradicional e stickers florais em papel kraft.</p>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-weight:700; color:#0F172A;">A partir de R$ 45,00</span>
+              <button class="btn-primary" style="padding:6px 12px; font-size:0.8rem;" onclick="switchView('artistProfile')">Ver Perfil</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="vgen-card">
+          <div class="card-media" style="background:#EFF6FF; height:180px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+            <div class="avatar-circle" style="width:54px; height:54px; font-size:1.3rem;">T</div>
+            <strong style="margin-top:10px; color:#1E293B;">Thiago Nanquin</strong>
+            <small style="color:#64748B;">@thiagonanquin</small>
+          </div>
+          <div class="card-content" style="padding:16px;">
+            <span class="badge-neutral">Novo Artista • 2 avaliações (5.0 ★)</span>
+            <p style="font-size:0.85rem; color:#475569; margin:10px 0;">Ilustrações originais em bico de pena e nanquim preto sobre papel canson 300g.</p>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-weight:700; color:#0F172A;">A partir de R$ 90,00</span>
+              <button class="btn-primary" style="padding:6px 12px; font-size:0.8rem;" onclick="switchView('artistProfile')">Ver Perfil</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="vgen-card">
+          <div class="card-media" style="background:#FFFBEB; height:180px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+            <div class="avatar-circle" style="width:54px; height:54px; font-size:1.3rem;">C</div>
+            <strong style="margin-top:10px; color:#1E293B;">Camila Cerâmica</strong>
+            <small style="color:#64748B;">@camilaceramica</small>
+          </div>
+          <div class="card-content" style="padding:16px;">
+            <span class="badge-neutral">Novo Artista • Cadastrado há 2 semanas</span>
+            <p style="font-size:0.85rem; color:#475569; margin:10px 0;">Bottons de argila polimérica pintados à mão e peças decorativas queimadas em alta temperatura.</p>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-weight:700; color:#0F172A;">A partir de R$ 30,00</span>
+              <button class="btn-primary" style="padding:6px 12px; font-size:0.8rem;" onclick="switchView('artistProfile')">Ver Perfil</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TELA 06: PLANOS E BENEFÍCIOS (MVP) ================= -->
+  <section class="app-view" id="viewPlans" style="display:none;">
+    <div class="container view-container">
+      <div class="screen-header-badge-row">
+        <span class="screen-badge-id">TELA 06 • MODELO DE NEGÓCIOS</span>
+        <span class="screen-badge-scope badge-scope-mvp">● Prevista no Escopo do MVP</span>
+      </div>
+      <div class="view-header-row">
+        <div>
+          <span class="section-kicker">MONETIZAÇÃO SAAS TRANSPARENTE</span>
+          <h2 class="view-title">Planos e Benefícios Artesio</h2>
+          <p class="view-desc">Sem comissão sobre o trabalho artístico (0% de comissão). Escolha o plano com os recursos de gestão e personalização ideais para o seu momento profissional.</p>
+          <div class="screen-req-tags">
+            <span class="req-tag">RF09, RF10, RF11, RF13, RF15, RF16</span>
+            <span class="req-tag rn">RN07, RN08, RN09, RN11, RN13, RN14</span>
+            <span class="req-tag rnf">RNF04</span>
+          </div>
+        </div>
+        <div class="header-action">
+          <button class="btn-secondary" onclick="switchView('marketplace')">← Voltar</button>
+        </div>
+      </div>
+
+      <div class="pricing-cards-grid">
+        <!-- Plano Ateliê -->
+        <div class="pricing-card">
+          <div>
+            <h3 class="pricing-title">Ateliê</h3>
+            <p class="pricing-sub">Para quem está começando a vender e organizar suas encomendas.</p>
+            <div class="pricing-price">R$ 0 <small>/mês (Gratuito)</small></div>
+            <ul class="pricing-features-list">
+              <li class="check">Vitrine física e pronta-entrega</li>
+              <li class="check">Até 3 encomendas ativas no mês</li>
+              <li class="check">Link básico para Bio das redes</li>
+              <li class="check">Proteção de pagamento Pix (10% ao comprador)</li>
+              <li class="cross">Controle de faturamento anual MEI</li>
+              <li class="cross">Estatísticas detalhadas de conversão</li>
+              <li class="cross">Personalização estética avançada do portfólio</li>
+            </ul>
+          </div>
+          <button class="btn-secondary btn-block" onclick="showToast('Plano Ateliê ativo por padrão.')">Seu Plano Atual</button>
+        </div>
+
+        <!-- Plano Pro -->
+        <div class="pricing-card featured">
+          <div>
+            <h3 class="pricing-title">Pro</h3>
+            <p class="pricing-sub">Para artistas profissionais com fluxo contínuo de encomendas.</p>
+            <div class="pricing-price">R$ 29 <small>/mês</small></div>
+            <ul class="pricing-features-list">
+              <li class="check">Encomendas ilimitadas na fila</li>
+              <li class="check">Painel de controle financeiro do teto MEI</li>
+              <li class="check">Estatísticas privadas de acessos e conversão</li>
+              <li class="check">Personalização visual com temas e cores</li>
+              <li class="check">Selo Artista Verificado Pro</li>
+              <li class="check">Suporte prioritário na moderação</li>
+              <li class="cross">Múltiplos artistas (Gestão de Coletivo)</li>
+            </ul>
+          </div>
+          <button class="btn-primary btn-block" onclick="showToast('Assinatura Pro simulada com sucesso!')">Assinar Plano Pro (Simulação)</button>
+        </div>
+
+        <!-- Plano Estúdio -->
+        <div class="pricing-card">
+          <div>
+            <h3 class="pricing-title">Estúdio</h3>
+            <p class="pricing-sub">Para coletivos artísticos, estúdios independentes e guildas.</p>
+            <div class="pricing-price">R$ 69 <small>/mês</small></div>
+            <ul class="pricing-features-list">
+              <li class="check">Tudo do Plano Pro</li>
+              <li class="check">Cadastro de até 5 artistas sob o mesmo coletivo</li>
+              <li class="check">Painel consolidado de faturamento e divisão</li>
+              <li class="check">Links bio personalizados para cada membro</li>
+              <li class="check">Fila de espera compartilhada da guilda</li>
+              <li class="check">Exportação de relatórios contábeis para contador</li>
+            </ul>
+          </div>
+          <button class="btn-secondary btn-block" onclick="showToast('Assinatura Estúdio simulada com sucesso!')">Assinar Plano Estúdio</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TELA 11: FAVORITOS E ARTISTAS SEGUIDOS (FUTURO) ================= -->
+  <section class="app-view" id="viewFavorites" style="display:none;">
+    <div class="container view-container">
+      <div class="screen-header-badge-row">
+        <span class="screen-badge-id">TELA 11 • COMPRADOR</span>
+        <span class="screen-badge-scope badge-scope-future">○ Protótipo Navegável — Funcionalidade Futura</span>
+      </div>
+      <div class="view-header-row">
+        <div>
+          <span class="section-kicker">SUAS REFERÊNCIAS SALVAS</span>
+          <h2 class="view-title">Favoritos e Artistas Seguidos</h2>
+          <p class="view-desc">Acompanhe novos lançamentos dos artistas que você admira e guarde referências para futuras encomendas.</p>
+          <div class="screen-req-tags">
+            <span class="req-tag">RF12</span>
+            <span class="req-tag rn">RN10</span>
+            <span class="req-tag rnf">RNF01, RNF02, RNF04</span>
+          </div>
+        </div>
+        <div class="header-action">
+          <button class="btn-secondary" onclick="switchView('client')">← Painel do Comprador</button>
+        </div>
+      </div>
+
+      <div class="panel-box" style="margin-bottom:24px;">
+        <div class="panel-box-header">
+          <h3>Artistas que você segue</h3>
+          <span class="badge-neutral">2 artistas</span>
+        </div>
+        <div style="display:flex; gap:16px; flex-wrap:wrap; padding:16px;">
+          <div style="display:flex; align-items:center; gap:12px; background:#F8FAFC; border:1px solid #E2E8F0; padding:12px 18px; border-radius:10px;">
+            <div class="avatar-circle" style="width:40px; height:40px;">M</div>
+            <div>
+              <strong style="display:block;">Mayumi Art</strong>
+              <small style="color:#64748B;">@mayumi_arts • 2 vagas abertas</small>
+            </div>
+            <button class="btn-secondary" style="padding:4px 10px; font-size:0.75rem; margin-left:12px;" onclick="switchView('artistProfile')">Ver Perfil</button>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:12px; background:#F8FAFC; border:1px solid #E2E8F0; padding:12px 18px; border-radius:10px;">
+            <div class="avatar-circle" style="width:40px; height:40px;">L</div>
+            <div>
+              <strong style="display:block;">Lucas Prado</strong>
+              <small style="color:#64748B;">@lucasprado_art • Fila de espera</small>
+            </div>
+            <button class="btn-secondary" style="padding:4px 10px; font-size:0.75rem; margin-left:12px;" onclick="switchView('artistProfile')">Ver Perfil</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-box">
+        <div class="panel-box-header">
+          <h3>Obras Salvas como Favoritas</h3>
+          <span class="badge-neutral">3 itens</span>
+        </div>
+        <div class="vgen-cards-grid" id="favoritesArtworksGrid">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TELA 12: CARRINHO DE COMPRAS (MVP) ================= -->
+  <section class="app-view" id="viewCart" style="display:none;">
+    <div class="container view-container">
+      <div class="screen-header-badge-row">
+        <span class="screen-badge-id">TELA 12 • COMPRADOR</span>
+        <span class="screen-badge-scope badge-scope-mvp">● Prevista no Escopo do MVP</span>
+      </div>
+      <div class="view-header-row">
+        <div>
+          <span class="section-kicker">ITENS FÍSICOS DE PRONTA-ENTREGA</span>
+          <h2 class="view-title">Carrinho de Compras</h2>
+          <p class="view-desc">Revise suas peças de pintura, bottons e stickers físicos selecionados antes de fechar o pedido protegido.</p>
+          <div class="screen-req-tags">
+            <span class="req-tag">RF04, RF14 (parcial)</span>
+            <span class="req-tag rn">RN04, RN12</span>
+            <span class="req-tag rnf">RNF01, RNF04</span>
+          </div>
+        </div>
+        <div class="header-action">
+          <button class="btn-secondary" onclick="switchView('marketplace')">Continuar Comprando</button>
+        </div>
+      </div>
+
+      <div class="cart-layout">
+        <div class="panel-box">
+          <div class="panel-box-header">
+            <h3>Itens no Carrinho</h3>
+            <span class="badge-neutral">Pronta-entrega direta do artista</span>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Item / Artista</th>
+                  <th>Preço Unit.</th>
+                  <th>Qtd.</th>
+                  <th>Subtotal</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="cartItemsBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="checkout-summary-box">
+          <h3 style="margin-bottom:16px;">Resumo do Pedido</h3>
+          <div class="checkout-row-cost">
+            <span>Subtotal dos produtos:</span>
+            <strong id="cartSubtotal">R$ 390,00</strong>
+          </div>
+          <div class="checkout-row-cost">
+            <span>Taxa de Proteção Pix (10%):</span>
+            <strong id="cartProtectionFee" style="color:#059669;">R$ 39,00</strong>
+          </div>
+          <div class="checkout-row-cost">
+            <span>Frete estimado (correios/artista):</span>
+            <strong id="cartShipping">R$ 25,00</strong>
+          </div>
+          <div class="checkout-row-cost total">
+            <span>Total com Garantia:</span>
+            <span id="cartTotal" style="color:#4F46E5;">R$ 454,00</span>
+          </div>
+          <p style="font-size:0.75rem; color:#64748B; margin:14px 0;">
+            🔒 Pagamento em custódia Pix: o valor só é repassado ao artista após a postagem e entrega do código de rastreio.
+          </p>
+          <button class="btn-primary btn-block" onclick="proceedToCheckout()">Avançar para o Checkout →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TELA 13: CHECKOUT E PAGAMENTO SIMULADO (MVP) ================= -->
+  <section class="app-view" id="viewCheckout" style="display:none;">
+    <div class="container view-container">
+      <div class="screen-header-badge-row">
+        <span class="screen-badge-id">TELA 13 • TRANSAÇÃO SIMULADA</span>
+        <span class="screen-badge-scope badge-scope-mvp">● Prevista no Escopo do MVP</span>
+      </div>
+      <div class="view-header-row">
+        <div>
+          <span class="section-kicker">CUSTÓDIA E PROTEÇÃO DE COMPRA</span>
+          <h2 class="view-title">Checkout e Pagamento Seguro Pix</h2>
+          <p class="view-desc">Composição transparente de valores conforme o TCC Artesio (Capítulo 3 e 4.2). Simulação protegida sem cobrança bancária real.</p>
+          <div class="screen-req-tags">
+            <span class="req-tag">RF04, RF14, RF06 (conceitual)</span>
+            <span class="req-tag rn">RN04, RN12, RN15</span>
+            <span class="req-tag rnf">RNF02, RNF04</span>
+          </div>
+        </div>
+        <div class="header-action">
+          <button class="btn-secondary" onclick="switchView('cart')">← Voltar ao Carrinho</button>
+        </div>
+      </div>
+
+      <div class="cart-layout">
+        <div class="panel-box">
+          <div class="panel-box-header">
+            <h3>1. Endereço de Entrega (Peça Física)</h3>
+          </div>
+          <div style="padding:16px;">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:14px; margin-bottom:14px;">
+              <div>
+                <label class="form-label">Nome Completo do Destinatário:</label>
+                <input type="text" class="form-input" value="Carlos Eduardo Martins" readonly>
+              </div>
+              <div>
+                <label class="form-label">Telefone / WhatsApp para Entrega:</label>
+                <input type="text" class="form-input" value="(11) 98765-4321" readonly>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns: 2fr 1fr; gap:14px;">
+              <div>
+                <label class="form-label">Endereço Completo:</label>
+                <input type="text" class="form-input" value="Av. Engenheiro Eusébio Stevaux, 823 - Santo Amaro, São Paulo - SP" readonly>
+              </div>
+              <div>
+                <label class="form-label">CEP:</label>
+                <input type="text" class="form-input" value="04696-000" readonly>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-box-header" style="border-top:1px solid #E2E8F0; margin-top:20px;">
+            <h3>2. Meio de Pagamento: Pix Protegido com Custódia</h3>
+          </div>
+          <div style="padding:16px; background:#F8FAFC;">
+            <div style="display:flex; align-items:center; gap:16px;">
+              <div style="width:100px; height:100px; background:#FFFFFF; border:2px solid #CBD5E1; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800; color:#4F46E5; font-size:0.8rem; text-align:center;">
+                QR CODE PIX<br>(SIMULADO)
+              </div>
+              <div>
+                <strong>Chave Pix Copia e Cola (Demonstrativa):</strong>
+                <p style="font-family:monospace; background:#E2E8F0; padding:6px 10px; border-radius:6px; font-size:0.8rem; margin:6px 0;">00020126580014br.gov.bcb.pix0136artesio-tcc-pix-custodia-simulada</p>
+                <small style="color:#059669; font-weight:600;">✓ Valor retido em conta escrow do Artesio até confirmação de envio pelo artista.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkout-summary-box">
+          <h3 style="margin-bottom:16px;">Resumo Financeiro</h3>
+          <div class="checkout-row-cost">
+            <span>Repasse do Artista (100%):</span>
+            <strong>R$ 390,00</strong>
+          </div>
+          <div class="checkout-row-cost">
+            <span>Taxa do Artesio (10%):</span>
+            <strong style="color:#059669;">R$ 39,00</strong>
+          </div>
+          <div class="checkout-row-cost">
+            <span>Frete Físico:</span>
+            <strong>R$ 25,00</strong>
+          </div>
+          <div class="checkout-row-cost total">
+            <span>Total da Operação:</span>
+            <span style="color:#4F46E5;">R$ 454,00</span>
+          </div>
+          <button class="btn-primary btn-block" style="margin-top:20px;" onclick="finishSimulatedCheckout()">Confirmar Pagamento Simulado ✓</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TELA 14: DETALHES E ACOMPANHAMENTO DO PEDIDO (MVP) ================= -->
+  <section class="app-view" id="viewOrderTracking" style="display:none;">
+    <div class="container view-container">
+      <div class="screen-header-badge-row">
+        <span class="screen-badge-id">TELA 14 • COMPRADOR</span>
+        <span class="screen-badge-scope badge-scope-mvp">● Prevista no Escopo do MVP</span>
+      </div>
+      <div class="view-header-row">
+        <div>
+          <span class="section-kicker">STATUS DA COMPRA FÍSICA</span>
+          <h2 class="view-title">Acompanhamento do Pedido #ART-2026-88</h2>
+          <p class="view-desc">Visão transparente do rastreio, dados da postagem por conta do artista e garantia de custódia.</p>
+          <div class="screen-req-tags">
+            <span class="req-tag">RF04, RF14, RF05 (parcial)</span>
+            <span class="req-tag rn">RN04, RN12</span>
+            <span class="req-tag rnf">RNF01, RNF02, RNF04</span>
+          </div>
+        </div>
+        <div class="header-action">
+          <button class="btn-secondary" onclick="switchView('client')">← Voltar ao Painel</button>
+        </div>
+      </div>
+
+      <div class="timeline-stages">
+        <div class="timeline-step completed">
+          <div class="timeline-dot">✓</div>
+          <span class="timeline-label">1. Pagamento Retido</span>
+        </div>
+        <div class="timeline-step completed">
+          <div class="timeline-dot">✓</div>
+          <span class="timeline-label">2. Embalagem e Preparo</span>
+        </div>
+        <div class="timeline-step current">
+          <div class="timeline-dot">●</div>
+          <span class="timeline-label">3. Objeto Postado</span>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-dot">○</div>
+          <span class="timeline-label">4. Entregue e Liberado</span>
+        </div>
+      </div>
+
+      <div class="panel-box">
+        <div class="panel-box-header">
+          <h3>Informações de Envio dos Correios</h3>
+          <span class="badge-accent">Código de Rastreio: BR789012345SP</span>
+        </div>
+        <div style="padding:16px;">
+          <p><strong>Artista Remetente:</strong> Mayumi Art (@mayumi_arts)</p>
+          <p><strong>Objeto:</strong> Quadro Original Pintura a Óleo - Aurora (30x40 cm) com moldura de proteção.</p>
+          <p><strong>Previsão de Chegada:</strong> 4 dias úteis (Sedex).</p>
+          <div style="margin-top:16px; background:#ECFDF5; border:1px solid #A7F3D0; padding:12px; border-radius:8px; color:#065F46;">
+            <strong>Garantia Artesio ativa:</strong> Se o produto chegar danificado ou não for entregue, solicite intervenção pelo botão de suporte antes de liberar a custódia.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TELA 16: GERENCIAR PORTFÓLIO (MVP) ================= -->
+  <section class="app-view" id="viewManagePortfolio" style="display:none;">
+    <div class="container view-container">
+      <div class="screen-header-badge-row">
+        <span class="screen-badge-id">TELA 16 • ARTISTA</span>
+        <span class="screen-badge-scope badge-scope-mvp">● Prevista no Escopo do MVP</span>
+      </div>
+      <div class="view-header-row">
+        <div>
+          <span class="section-kicker">PORTFÓLIO E TRABALHOS ANTERIORES</span>
+          <h2 class="view-title">Gerenciar Portfólio Artístico</h2>
+          <p class="view-desc">Separe trabalhos de exibição estética dos produtos físicos cadastrados para venda imediata. Ordene, oculte ou edite suas obras.</p>
+          <div class="screen-req-tags">
+            <span class="req-tag">RF02, RF04, RF16</span>
+            <span class="req-tag rn">RN01, RN02, RN04, RN14</span>
+            <span class="req-tag rnf">RNF01, RNF04</span>
+          </div>
+        </div>
+        <div class="header-action">
+          <button class="btn-primary" onclick="openNewArtworkModal()">+ Publicar no Portfólio</button>
+        </div>
+      </div>
+
+      <div class="panel-box">
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Obra</th>
+                <th>Tipo</th>
+                <th>Estilo / Técnica</th>
+                <th>Status no Perfil</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>the critter / YCH & Personagem Custom</strong></td>
+                <td><span class="badge-neutral">Portfólio & Encomenda</span></td>
+                <td>Anime / Mangá • Clip Studio</td>
+                <td><span class="badge-accent">● Visível</span></td>
+                <td>
+                  <button class="btn-secondary" style="padding:4px 8px;" onclick="openNewArtworkModal()">Editar</button>
+                  <button class="btn-secondary" style="padding:4px 8px;" onclick="showToast('Obra ocultada do perfil público.')">Ocultar</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Quadro Original Pintura a Óleo - Aurora</strong></td>
+                <td><span class="badge-neutral">Pronta-Entrega Física</span></td>
+                <td>Pintura Tradicional</td>
+                <td><span class="badge-accent">● Visível</span></td>
+                <td>
+                  <button class="btn-secondary" style="padding:4px 8px;" onclick="openNewArtworkModal()">Editar</button>
+                  <button class="btn-secondary" style="padding:4px 8px;" onclick="showToast('Obra ocultada do perfil público.')">Ocultar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TELA 18: GERENCIAR VENDAS E ESTOQUE (MVP) ================= -->
+  <section class="app-view" id="viewStockManagement" style="display:none;">
+    <div class="container view-container">
+      <div class="screen-header-badge-row">
+        <span class="screen-badge-id">TELA 18 • ARTISTA</span>
+        <span class="screen-badge-scope badge-scope-mvp">● Prevista no Escopo do MVP</span>
+      </div>
+      <div class="view-header-row">
+        <div>
+          <span class="section-kicker">LOGÍSTICA E ITENS FÍSICOS</span>
+          <h2 class="view-title">Gerenciar Vendas e Estoque</h2>
+          <p class="view-desc">Controle de unidades disponíveis para itens prontos (pinturas, bottons e stickers). Evite vendas duplicadas além da sua capacidade de postagem.</p>
+          <div class="screen-req-tags">
+            <span class="req-tag">RF04, RF02</span>
+            <span class="req-tag rn">RN04, RN01</span>
+            <span class="req-tag rnf">RNF01, RNF04</span>
+          </div>
+        </div>
+        <div class="header-action">
+          <button class="btn-secondary" onclick="switchView('artist')">← Portal do Artista</button>
+        </div>
+      </div>
+
+      <div class="metrics-row">
+        <div class="metric-card">
+          <span class="metric-label">ITENS EM ESTOQUE ATIVO</span>
+          <span class="metric-val">16 unidades</span>
+          <span class="metric-sub text-emerald">2 categorias cadastradas</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">RESERVAS AGUARDANDO POSTAGEM</span>
+          <span class="metric-val">3 unidades</span>
+          <span class="metric-sub">Custódia Pix garantida</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">PEÇAS ESGOTADAS</span>
+          <span class="metric-val">1 item</span>
+          <span class="metric-sub">Pronto para reposição</span>
+        </div>
+      </div>
+
+      <div class="panel-box">
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Item Físico</th>
+                <th>Categoria</th>
+                <th>Estoque Atual</th>
+                <th>Preço Unitário</th>
+                <th>Status</th>
+                <th>Ajustar Estoque</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Quadro Original Aurora 30x40cm</strong></td>
+                <td>Pintura Física</td>
+                <td><strong>2</strong> un.</td>
+                <td>R$ 320,00</td>
+                <td><span class="badge-accent">Disponível</span></td>
+                <td>
+                  <button class="btn-secondary" style="padding:4px 8px;" onclick="showToast('Estoque atualizado +1')">+1</button>
+                  <button class="btn-secondary" style="padding:4px 8px;" onclick="showToast('Estoque atualizado -1')">-1</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Pack 5 Stickers Holográficos Gatinhos</strong></td>
+                <td>Stickers</td>
+                <td><strong>14</strong> packs</td>
+                <td>R$ 35,00</td>
+                <td><span class="badge-accent">Disponível</span></td>
+                <td>
+                  <button class="btn-secondary" style="padding:4px 8px;" onclick="showToast('Estoque atualizado +1')">+1</button>
+                  <button class="btn-secondary" style="padding:4px 8px;" onclick="showToast('Estoque atualizado -1')">-1</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Bottons Metálicos Série Botânica</strong></td>
+                <td>Bottons</td>
+                <td><strong style="color:#DC2626;">0</strong> un.</td>
+                <td>R$ 15,00</td>
+                <td><span class="badge-neutral" style="color:#DC2626;">ESGOTADO</span></td>
+                <td>
+                  <button class="btn-primary" style="padding:4px 8px;" onclick="showToast('Estoque reaberto com 10 unidades')">Repor Estoque</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TELA 19: AGENDA E FILA DE ESPERA (FUTURO) ================= -->
+  <section class="app-view" id="viewWaitlistSchedule" style="display:none;">
+    <div class="container view-container">
+      <div class="screen-header-badge-row">
+        <span class="screen-badge-id">TELA 19 • ARTISTA</span>
+        <span class="screen-badge-scope badge-scope-future">○ Protótipo Navegável — Funcionalidade Futura</span>
+      </div>
+      <div class="view-header-row">
+        <div>
+          <span class="section-kicker">PLANEJAMENTO DE CAPACIDADE</span>
+          <h2 class="view-title">Agenda e Fila de Espera (Waitlist)</h2>
+          <p class="view-desc">Organize as vagas mensais para encomendas personalizadas. O artista define a prioridade de atendimento com total autonomia (RN05).</p>
+          <div class="screen-req-tags">
+            <span class="req-tag">RF05, RF12 (parcial)</span>
+            <span class="req-tag rn">RN05, RN07, RN10</span>
+            <span class="req-tag rnf">RNF01, RNF04</span>
+          </div>
+        </div>
+        <div class="header-action">
+          <button class="btn-secondary" onclick="switchView('artist')">← Portal do Artista</button>
+        </div>
+      </div>
+
+      <div class="metrics-row">
+        <div class="metric-card">
+          <span class="metric-label">CAPACIDADE MENSAL</span>
+          <span class="metric-val">5 encomendas</span>
+          <span class="metric-sub">Meta sustentável definida pelo artista</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">VAGAS EM PRODUÇÃO</span>
+          <span class="metric-val">3 vagas</span>
+          <span class="metric-sub">Rascunho e lineart em curso</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">CLIENTES NA FILA DE ESPERA</span>
+          <span class="metric-val">4 interessados</span>
+          <span class="metric-sub">Notificação automática ao abrir vaga</span>
+        </div>
+      </div>
+
+      <div class="panel-box">
+        <div class="panel-box-header">
+          <h3>Fila de Espera dos Próximos Meses</h3>
+          <span class="badge-neutral">Ordem definida pelo artista</span>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Posição</th>
+                <th>Cliente Interessado</th>
+                <th>Ideia da Obra</th>
+                <th>Prazo Desejado</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>#1</strong></td>
+                <td>Juliana Castro (@jucastro)</td>
+                <td>Retrato comemorativo bodas de prata (óleo)</td>
+                <td>Próximo mês</td>
+                <td><button class="btn-primary" style="padding:4px 10px;" onclick="showToast('Convite de vaga enviado para Juliana!')">Convidar para Vaga</button></td>
+              </tr>
+              <tr>
+                <td><strong>#2</strong></td>
+                <td>Fernando Albuquerque</td>
+                <td>Ilustração de mascote para café colonial</td>
+                <td>Flexível</td>
+                <td><button class="btn-secondary" style="padding:4px 10px;" onclick="showToast('Posição adiantada na fila.')">Subir Prioridade</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TELA 20: FINANCEIRO E CONTROLE DO MEI (MVP) ================= -->
+  <section class="app-view" id="viewMeiFinance" style="display:none;">
+    <div class="container view-container">
+      <div class="screen-header-badge-row">
+        <span class="screen-badge-id">TELA 20 • GESTÃO TRIBUTÁRIA</span>
+        <span class="screen-badge-scope badge-scope-mvp">● Prevista no Escopo do MVP</span>
+      </div>
+      <div class="view-header-row">
+        <div>
+          <span class="section-kicker">MONITORAMENTO MEI</span>
+          <h2 class="view-title">Painel Financeiro &amp; Teto Anual do MEI</h2>
+          <p class="view-desc">Acompanhamento transparente das receitas acumuladas na plataforma para evitar desenquadramento acidental do limite anual de R$ 81.000,00.</p>
+          <div class="screen-req-tags">
+            <span class="req-tag">RF10, RF09</span>
+            <span class="req-tag rn">RN07, RN08, RN13</span>
+            <span class="req-tag rnf">RNF01, RNF02, RNF04</span>
+          </div>
+        </div>
+        <div class="header-action">
+          <button class="btn-secondary" onclick="switchView('artist')">← Portal do Artista</button>
+        </div>
+      </div>
+
+      <div class="metrics-row">
+        <div class="metric-card">
+          <span class="metric-label">FATURAMENTO NO ANO (2026)</span>
+          <span class="metric-val" style="color:#059669;">R$ 29.400,00</span>
+          <span class="metric-sub">36,3% do limite de R$ 81.000,00</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">MARGEM RESTANTE NO MEI</span>
+          <span class="metric-val">R$ 51.600,00</span>
+          <span class="metric-sub text-emerald">● Zona Segura</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">MÉDIA MENSAL ESTIMADA</span>
+          <span class="metric-val">R$ 2.450,00 / mês</span>
+          <span class="metric-sub">Teto mensal recomendado: R$ 6.750,00</span>
+        </div>
+      </div>
+
+      <div class="panel-box">
+        <div class="panel-box-header">
+          <h3>Simulação de Faturamento Mensal (Dados Demonstrativos)</h3>
+          <span class="badge-accent">0% de taxa sobre a remuneração</span>
+        </div>
+        <div style="padding:20px;">
+          <div style="background:#F1F5F9; border-radius:8px; height:18px; width:100%; overflow:hidden; margin-bottom:12px;">
+            <div style="background:linear-gradient(90deg, #10B981 0%, #3B82F6 100%); width:36.3%; height:100%;"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:#64748B;">
+            <span>R$ 0,00</span>
+            <span>R$ 40.500 (50%)</span>
+            <span>R$ 81.000,00 (Teto Legal MEI)</span>
+          </div>
+          <div style="margin-top:20px; font-size:0.85rem; color:#475569; background:#EFF6FF; border:1px solid #BFDBFE; padding:14px; border-radius:8px;">
+            ℹ️ <strong>Nota Acadêmica:</strong> As informações financeiras apresentadas são meramente analíticas e não constituem assessoria contábil. A emissão de NFS-e ou DAS-SIMEI permanece sob responsabilidade do titular do CNPJ MEI.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TELA 21: ESTATÍSTICAS DO PORTFÓLIO (MVP) ================= -->
+  <section class="app-view" id="viewPortfolioStats" style="display:none;">
+    <div class="container view-container">
+      <div class="screen-header-badge-row">
+        <span class="screen-badge-id">TELA 21 • ANALYTICS PRIVADO</span>
+        <span class="screen-badge-scope badge-scope-mvp">● Prevista no Escopo do MVP</span>
+      </div>
+      <div class="view-header-row">
+        <div>
+          <span class="section-kicker">MÉTRICAS PRIVADAS DO ARTISTA</span>
+          <h2 class="view-title">Estatísticas do Portfólio</h2>
+          <p class="view-desc">Métricas confidenciais para assinantes Pro e Estúdio. Nunca utilizadas para ranquear ou punir artistas publicamente (RN03 e RN13).</p>
+          <div class="screen-req-tags">
+            <span class="req-tag">RF15, RF09</span>
+            <span class="req-tag rn">RN07, RN13</span>
+            <span class="req-tag rnf">RNF01, RNF02, RNF04</span>
+          </div>
+        </div>
+        <div class="header-action">
+          <button class="btn-secondary" onclick="switchView('artist')">← Portal do Artista</button>
+        </div>
+      </div>
+
+      <div class="metrics-row">
+        <div class="metric-card">
+          <span class="metric-label">VISITAS AO SEU PERFIL</span>
+          <span class="metric-val">1.420</span>
+          <span class="metric-sub text-emerald">↑ +18% nos últimos 30 dias</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">CLIQUES NO LINK DA BIO</span>
+          <span class="metric-val">384 cliques</span>
+          <span class="metric-sub">Instagram e WhatsApp</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">TAXA DE CONVERSÃO EM PEDIDO</span>
+          <span class="metric-val">4.2%</span>
+          <span class="metric-sub">Média do segmento: 3.5%</span>
+        </div>
+      </div>
+
+      <div class="panel-box">
+        <div class="panel-box-header">
+          <h3>Obras Mais Visualizadas</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Obra</th>
+                <th>Visualizações</th>
+                <th>Favoritadas</th>
+                <th>Pedidos Gerados</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>the critter / YCH Custom</strong></td>
+                <td>742 views</td>
+                <td>89 vezes</td>
+                <td>12 pedidos</td>
+              </tr>
+              <tr>
+                <td><strong>Quadro Original Aurora 30x40cm</strong></td>
+                <td>415 views</td>
+                <td>52 vezes</td>
+                <td>2 pedidos</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TELA 22: PERSONALIZAÇÃO DO PORTFÓLIO (MVP) ================= -->
+  <section class="app-view" id="viewPortfolioCustomizer" style="display:none;">
+    <div class="container view-container">
+      <div class="screen-header-badge-row">
+        <span class="screen-badge-id">TELA 22 • IDENTIDADE VISUAL</span>
+        <span class="screen-badge-scope badge-scope-mvp">● Prevista no Escopo do MVP</span>
+      </div>
+      <div class="view-header-row">
+        <div>
+          <span class="section-kicker">CUSTOMIZAÇÃO ESTÉTICA</span>
+          <h2 class="view-title">Personalização do Portfólio</h2>
+          <p class="view-desc">Configure o tema de cores, banner e disposição das obras no seu link público para clientes (Planos Pro e Estúdio).</p>
+          <div class="screen-req-tags">
+            <span class="req-tag">RF16, RF09, RF02</span>
+            <span class="req-tag rn">RN07, RN14</span>
+            <span class="req-tag rnf">RNF01, RNF04</span>
+          </div>
+        </div>
+        <div class="header-action">
+          <button class="btn-primary" onclick="showToast('Configurações visuais salvas no perfil!')">Salvar Alterações</button>
+        </div>
+      </div>
+
+      <div class="cart-layout">
+        <div class="panel-box">
+          <div class="panel-box-header">
+            <h3>Opções de Tema</h3>
+          </div>
+          <div style="padding:16px;">
+            <div class="form-block">
+              <label class="form-label">Paleta de Destaque da Sua Galeria:</label>
+              <select class="form-input">
+                <option>Índigo Artesio (Padrão Sofisticado)</option>
+                <option>Lavanda Suave (Anime & Ilustrações)</option>
+                <option>Esmeralda & Terra (Pinturas Físicas & Artesanais)</option>
+                <option>Dark Minimalista (Fotografia e Escultura)</option>
+              </select>
+            </div>
+            <div class="form-block">
+              <label class="form-label">Layout da Vitrine de Entrada:</label>
+              <select class="form-input">
+                <option>Grade VGen em Mosaico (Recomendado)</option>
+                <option>Carrossel Horizontal de Destaques</option>
+                <option>Lista Detalhada com Dimensões e Especificações</option>
+              </select>
+            </div>
+            <div class="form-block">
+              <label class="form-label">Texto de Boas-vindas na Bio:</label>
+              <textarea class="form-input" rows="3">Bem-vindo ao meu ateliê independente no Artesio! Aqui você encontra pinturas originais e pode encomendar ilustrações com pagamento 100% protegido.</textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkout-summary-box">
+          <h3>Pré-visualização Rápida</h3>
+          <div style="margin-top:16px; border:1px solid #CBD5E1; border-radius:10px; padding:16px; background:#FFFFFF;">
+            <div style="height:50px; background:#EEF2FF; border-radius:6px; margin-bottom:10px; display:flex; align-items:center; justify-content:center; color:#4F46E5; font-weight:700; font-size:0.8rem;">
+              Banner do Ateliê
+            </div>
+            <div style="font-weight:700; font-size:0.9rem;">@mayumi_arts</div>
+            <p style="font-size:0.75rem; color:#64748B; margin-top:4px;">Pintura física e ilustrações sob encomenda com garantia Pix.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TELA 24: SOLICITAÇÃO DE ENCOMENDA PERSONALIZADA (FUTURO) ================= -->
+  <section class="app-view" id="viewCustomCommissionRequest" style="display:none;">
+    <div class="container view-container">
+      <div class="screen-header-badge-row">
+        <span class="screen-badge-id">TELA 24 • BRIEFING</span>
+        <span class="screen-badge-scope badge-scope-future">○ Protótipo Navegável — Funcionalidade Futura</span>
+      </div>
+      <div class="view-header-row">
+        <div>
+          <span class="section-kicker">ENCOMENDA SOB MEDIDA</span>
+          <h2 class="view-title">Solicitar Encomenda Personalizada</h2>
+          <p class="view-desc">Envie um briefing detalhado com suas referências e dimensões para o artista avaliar e montar a proposta orçamentária.</p>
+          <div class="screen-req-tags">
+            <span class="req-tag">RF05, RF11</span>
+            <span class="req-tag rn">RN05, RN09</span>
+            <span class="req-tag rnf">RNF02, RNF04</span>
+          </div>
+        </div>
+        <div class="header-action">
+          <button class="btn-secondary" onclick="switchView('marketplace')">← Cancelar</button>
+        </div>
+      </div>
+
+      <div class="panel-box">
+        <div style="padding:20px;">
+          <div class="form-block">
+            <label class="form-label">Artista Escolhido:</label>
+            <input type="text" class="form-input" value="Mayumi Art (@mayumi_arts)" readonly>
+          </div>
+          <div class="form-block">
+            <label class="form-label">Tipo de Obra Desejada:</label>
+            <select class="form-input">
+              <option>Pintura em Tela a Óleo / Acrílica</option>
+              <option>Lote de Stickers Físicos Personalizados</option>
+              <option>Conjunto de Bottons Colecionáveis</option>
+              <option>Ilustração Digital Personalizada</option>
+            </select>
+          </div>
+          <div class="form-block">
+            <label class="form-label">Descrição do Briefing e Conceito:</label>
+            <textarea class="form-input" rows="4" placeholder="Descreva os elementos visuais, paleta de cores desejada, referências afetivas ou de personagens..."></textarea>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+            <div class="form-block">
+              <label class="form-label">Dimensão Estimada da Peça:</label>
+              <input type="text" class="form-input" placeholder="Ex: 40x50 cm, A3, ou 5cm diâmetro">
+            </div>
+            <div class="form-block">
+              <label class="form-label">Prazo Limite Desejado:</label>
+              <input type="date" class="form-input">
+            </div>
+          </div>
+          <div style="margin-top:20px; display:flex; justify-content:flex-end; gap:12px;">
+            <button class="btn-secondary" onclick="switchView('marketplace')">Voltar</button>
+            <button class="btn-primary" onclick="showToast('Solicitação enviada ao artista! Acompanhe em Conversas.'); switchView('quoteApproval');">
+              Enviar para Orçamento →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TELA 25: ORÇAMENTO E APROVAÇÃO (FUTURO) ================= -->
+  <section class="app-view" id="viewQuoteApproval" style="display:none;">
+    <div class="container view-container">
+      <div class="screen-header-badge-row">
+        <span class="screen-badge-id">TELA 25 • PROPOSTA COMERCIAL</span>
+        <span class="screen-badge-scope badge-scope-future">○ Protótipo Navegável — Funcionalidade Futura</span>
+      </div>
+      <div class="view-header-row">
+        <div>
+          <span class="section-kicker">ACORDO FORMAL</span>
+          <h2 class="view-title">Orçamento Formal #ORC-4029</h2>
+          <p class="view-desc">Proposta técnica elaborada pelo artista com escopo detalhado, número de revisões e valor com custódia Pix garantida.</p>
+          <div class="screen-req-tags">
+            <span class="req-tag">RF05, RF06, RF11, RF14</span>
+            <span class="req-tag rn">RN05, RN09, RN12, RN17</span>
+            <span class="req-tag rnf">RNF02, RNF04</span>
+          </div>
+        </div>
+        <div class="header-action">
+          <span class="badge-accent">Aguardando Aceite do Comprador</span>
+        </div>
+      </div>
+
+      <div class="cart-layout">
+        <div class="panel-box">
+          <div class="panel-box-header">
+            <h3>Termos do Orçamento</h3>
+          </div>
+          <div style="padding:18px;">
+            <p><strong>Artista:</strong> Mayumi Art (@mayumi_arts)</p>
+            <p><strong>Escopo Técnico:</strong> Pintura original a óleo sobre tela de algodão 40x50 cm com acabamento em verniz damar e bordas pintadas.</p>
+            <p><strong>Prazo de Execução:</strong> 15 dias úteis a contar do aceite.</p>
+            <p><strong>Direito a Revisões:</strong> Até 2 rodadas na etapa de rascunho composicional antes da aplicação da tinta definitiva.</p>
+            <div style="margin-top:20px; display:flex; gap:12px;">
+              <button class="btn-primary" onclick="showToast('Orçamento aceito! Pagamento em custódia iniciado.'); switchView('orderTimeline');">
+                Aceitar Orçamento e Iniciar Garantia Pix
+              </button>
+              <button class="btn-secondary" onclick="showToast('Solicitação de ajuste enviada pelo chat.'); switchView('chats');">
+                Pedir Ajuste no Chat
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkout-summary-box">
+          <h3>Valores da Proposta</h3>
+          <div class="checkout-row-cost">
+            <span>Remuneração do Artista:</span>
+            <strong>R$ 480,00</strong>
+          </div>
+          <div class="checkout-row-cost">
+            <span>Taxa Proteção Pix (10%):</span>
+            <strong style="color:#059669;">R$ 48,00</strong>
+          </div>
+          <div class="checkout-row-cost total">
+            <span>Total com Custódia:</span>
+            <span style="color:#4F46E5;">R$ 528,00</span>
+          </div>
+          <small style="color:#64748B; display:block; margin-top:10px;">
+            O valor total fica protegido na conta caução até você aprovar o rascunho e a entrega final.
+          </small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TELA 26: ACOMPANHAMENTO DA ENCOMENDA PERSONALIZADA (FUTURO) ================= -->
+  <section class="app-view" id="viewOrderTimeline" style="display:none;">
+    <div class="container view-container">
+      <div class="screen-header-badge-row">
+        <span class="screen-badge-id">TELA 26 • PRODUÇÃO</span>
+        <span class="screen-badge-scope badge-scope-future">○ Protótipo Navegável — Funcionalidade Futura</span>
+      </div>
+      <div class="view-header-row">
+        <div>
+          <span class="section-kicker">LINHA DO TEMPO DA ENCOMENDA</span>
+          <h2 class="view-title">Produção da Encomenda #ENC-5510</h2>
+          <p class="view-desc">Acompanhe as etapas de produção física: rascunho preliminar, aprovação formal e postagem com custódia protegida.</p>
+          <div class="screen-req-tags">
+            <span class="req-tag">RF05, RF06, RF17</span>
+            <span class="req-tag rn">RN05, RN17</span>
+            <span class="req-tag rnf">RNF01, RNF02, RNF04</span>
+          </div>
+        </div>
+        <div class="header-action">
+          <button class="btn-secondary" onclick="switchView('client')">← Área do Cliente</button>
+        </div>
+      </div>
+
+      <div class="timeline-stages">
+        <div class="timeline-step completed">
+          <div class="timeline-dot">✓</div>
+          <span class="timeline-label">1. Briefing &amp; Sinal</span>
+        </div>
+        <div class="timeline-step current">
+          <div class="timeline-dot">●</div>
+          <span class="timeline-label">2. Aprovação do Rascunho</span>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-dot">○</div>
+          <span class="timeline-label">3. Pintura &amp; Acabamento</span>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-dot">○</div>
+          <span class="timeline-label">4. Envio &amp; Conclusão</span>
+        </div>
+      </div>
+
+      <div class="panel-box">
+        <div class="panel-box-header">
+          <h3>Fase Atual: Rascunho Composicional Disponível</h3>
+          <span class="badge-accent">Aguardando Avaliação</span>
+        </div>
+        <div style="padding:20px;">
+          <div style="height:220px; background:#F8FAFC; border:2px dashed #CBD5E1; border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#64748B;">
+            <span style="font-weight:700;">Prévia do Rascunho a Carvão Enviado pelo Artista</span>
+            <small style="margin-top:6px;">Foto de progresso do ateliê anexada em 07/11/2026</small>
+          </div>
+          <div style="margin-top:20px; display:flex; gap:12px; justify-content:flex-end;">
+            <button class="btn-secondary" onclick="showToast('Solicitação de ajuste no rascunho enviada ao artista.')">Solicitar Ajuste no Rascunho</button>
+            <button class="btn-primary" onclick="showToast('Rascunho Aprovado! O artista iniciará a pintura definitiva.');">Aprovar Rascunho para Pintura ✓</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TELA 29: DENÚNCIAS E MODERAÇÃO (FUTURO) ================= -->
+  <section class="app-view" id="viewAdminModeration" style="display:none;">
+    <div class="container view-container">
+      <div class="screen-header-badge-row">
+        <span class="screen-badge-id">TELA 29 • GOVERNANÇA E MODERAÇÃO</span>
+        <span class="screen-badge-scope badge-scope-future">○ Protótipo Navegável — Funcionalidade Futura</span>
+      </div>
+      <div class="view-header-row">
+        <div>
+          <span class="section-kicker">DIREITO DE DEFESA &amp; AUDITORIA ÉTICA</span>
+          <h2 class="view-title">Denúncias e Moderação</h2>
+          <p class="view-desc">Fluxo administrativo para registro, análise e decisão sobre conteúdo reportado. Garantia de contraditório, direito de defesa e histórico transparente de julgamento (RF07, RF08, RF18 e RN06).</p>
+          <div class="screen-req-tags">
+            <span class="req-tag">RF07, RF08, RF18</span>
+            <span class="req-tag rn">RN06, RN15</span>
+            <span class="req-tag rnf">RNF02, RNF04</span>
+          </div>
+        </div>
+        <div class="header-action">
+          <button class="btn-secondary" onclick="switchView('admin')">← Painel Admin</button>
+        </div>
+      </div>
+
+      <div class="metrics-row">
+        <div class="metric-card">
+          <span class="metric-label">DENÚNCIAS RECEBIDAS</span>
+          <span class="metric-val">3 casos</span>
+          <span class="metric-sub">Últimos 15 dias</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">EM FASE DE DEFESA DO ARTISTA</span>
+          <span class="metric-val text-amber">1 caso</span>
+          <span class="metric-sub">Prazo de 72h para envio de processo</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">JULGADAS / ARQUIVADAS</span>
+          <span class="metric-val text-emerald">2 resolvidas</span>
+          <span class="metric-sub">100% autoria comprovada</span>
+        </div>
+      </div>
+
+      <div class="panel-box">
+        <div class="panel-box-header">
+          <div>
+            <h3>Fila de Denúncias em Aberto</h3>
+            <p class="panel-sub">Análise detalhada de denúncias de IA generativa não declarada ou violação de direitos autorais.</p>
+          </div>
+          <span class="badge-accent">1 Requer Análise</span>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Protocolo</th>
+                <th>Obra / Artista Reportado</th>
+                <th>Motivo da Denúncia</th>
+                <th>Denunciante</th>
+                <th>Status da Defesa</th>
+                <th>Ações de Moderação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>#DEN-2026-04</strong></td>
+                <td>
+                  <strong>Gatinho Galáctico Neon</strong><br>
+                  <small style="color:#64748B;">@gabi_art • Bottons físicos</small>
+                </td>
+                <td><span class="badge-neutral" style="color:#B45309;">Suspeita de IA Generativa</span></td>
+                <td>Comprador Anônimo (#449)</td>
+                <td><span class="badge-neutral" style="color:#059669;">✓ Timelapse de 4 min enviado</span></td>
+                <td>
+                  <button class="btn-primary" style="padding:4px 8px; font-size:0.78rem;" onclick="showToast('Denúncia improcedente: autoria comprovada e arquivada.')">Aprovar Obra ✓</button>
+                  <button class="btn-secondary danger" style="padding:4px 8px; font-size:0.78rem;" onclick="showToast('Obra suspensa temporariamente para perícia adicional.')">Suspender</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>#DEN-2026-02</strong></td>
+                <td>
+                  <strong>Pintura Retrato Floral</strong><br>
+                  <small style="color:#64748B;">@lucasprado_art</small>
+                </td>
+                <td><span class="badge-neutral">Direitos de Imagem de Terceiro</span></td>
+                <td>Usuário @clara_m</td>
+                <td><span class="badge-accent">Resolvido (Autorização anexa)</span></td>
+                <td>
+                  <span class="badge-neutral" style="color:#059669;">Caso Encerrado</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel-box" style="margin-top:20px;">
+        <div class="panel-box-header">
+          <h3>Formulário de Abertura de Nova Denúncia (Simulação)</h3>
+        </div>
+        <div style="padding:18px;">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+            <div class="form-block">
+              <label class="form-label">Link ou Código da Obra Denunciada:</label>
+              <input type="text" class="form-input" placeholder="Ex: #ART-01 ou URL da vitrine">
+            </div>
+            <div class="form-block">
+              <label class="form-label">Tipo de Infração:</label>
+              <select class="form-input">
+                <option>Uso de IA generativa sem aviso ou falsa autoria humana</option>
+                <option>Cópia/Plágio de arte de outro criador independente</option>
+                <option>Produto entregue diferente do anunciado na vitrine física</option>
+                <option>Tentativa de transação externa fora da custódia segura</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-block">
+            <label class="form-label">Descrição dos fatos e evidências:</label>
+            <textarea class="form-input" rows="3" placeholder="Indique as incoerências anatômicas, artefatos de IA, ou links comprovatórios..."></textarea>
+          </div>
+          <button class="btn-primary" onclick="showToast('Denúncia protocolada com sucesso. O artista terá 72h para apresentar contraprova.')">
+            Protocolar Denúncia no Sistema
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= TELA 30: VERIFICAÇÃO DE AUTORIA HUMANA (FUTURO) ================= -->
+  <section class="app-view" id="viewHumanVerification" style="display:none;">
+    <div class="container view-container">
+      <div class="screen-header-badge-row">
+        <span class="screen-badge-id">TELA 30 • AUDITORIA ANTI-IA</span>
+        <span class="screen-badge-scope badge-scope-future">○ Protótipo Navegável — Funcionalidade Futura</span>
+      </div>
+      <div class="view-header-row">
+        <div>
+          <span class="section-kicker">GOVERNANÇA &amp; AUTORIA HUMANA</span>
+          <h2 class="view-title">Verificação de Autoria e Procedência</h2>
+          <p class="view-desc">Painel de análise de arquivos brutos de processo (timelapses, camadas PSD/CLIP e fotos de making-of tradicional) auditados por humanos, sem detecção automatizada opaca (RF18 e RN06).</p>
+          <div class="screen-req-tags">
+            <span class="req-tag">RF18, RF08</span>
+            <span class="req-tag rn">RN06, RN15</span>
+            <span class="req-tag rnf">RNF02, RNF04</span>
+          </div>
+        </div>
+        <div class="header-action">
+          <button class="btn-secondary" onclick="switchView('admin')">← Painel Admin</button>
+        </div>
+      </div>
+
+      <div class="panel-box">
+        <div class="panel-box-header">
+          <h3>Fila de Obras em Auditoria Voluntária</h3>
+          <span class="badge-accent">Selo 100% Autoria Humana</span>
+        </div>
+        <div style="padding:16px;">
+          <div class="evidence-card">
+            <div class="evidence-header">
+              <span class="evidence-title">Mayumi Art — Obra: "Aurora Boreal em Óleo"</span>
+              <span class="badge-accent">Evidência: Vídeo de Timelapse + 4 Fotos de Bastidores</span>
+            </div>
+            <p style="font-size:0.85rem; color:#475569; margin-bottom:12px;">
+              Arquivo anexado: <code>timelapse_processo_pincelada_4k.mp4</code> (240 MB) demonstrando mistura de tintas a óleo sobre paleta física de madeira.
+            </p>
+            <div style="display:flex; gap:10px;">
+              <button class="btn-primary" style="padding:6px 12px; font-size:0.8rem;" onclick="showToast('Selo de Autoria Humana Concedido à Obra!')">Aprovar e Conceder Selo 100% Humano ✓</button>
+              <button class="btn-secondary" style="padding:6px 12px; font-size:0.8rem;" onclick="showToast('Solicitado envio de foto segurando a tela com data escrita.')">Pedir Evidência Complementar</button>
+            </div>
+          </div>
+
+          <div class="evidence-card">
+            <div class="evidence-header">
+              <span class="evidence-title">Lucas Prado — Obra: "Retrato em Óleo e Textura"</span>
+              <span class="badge-accent">Evidência: Arquivo Bruto com Camadas (.PSD 62 Camadas)</span>
+            </div>
+            <p style="font-size:0.85rem; color:#475569; margin-bottom:12px;">
+              Arquivo anexado: <code>estudo_iluminacao_camadas_abertas.psd</code> com histórico de pinceladas e camadas vetoriais sem artefatos generativos.
+            </p>
+            <div style="display:flex; gap:10px;">
+              <button class="btn-primary" style="padding:6px 12px; font-size:0.8rem;" onclick="showToast('Selo de Autoria Humana Concedido!')">Aprovar e Conceder Selo 100% Humano ✓</button>
+              <button class="btn-secondary" style="padding:6px 12px; font-size:0.8rem;" onclick="showToast('Evidência arquivada para análise.')">Em Análise</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
   <footer class="footer">
     <div class="watermark-text footer-watermark" aria-hidden="true">ARTESIO</div>
     <div class="container footer-layout">
@@ -1061,6 +2337,33 @@
     <span class="toast-txt" id="toastMessage">Operação realizada com sucesso.</span>
   </div>
 
+    <!-- ================= MODAL NAVEGADOR GERAL DE 30 TELAS ================= -->
+  <div class="modal-overlay" id="screensNavigatorModal" style="display:none;">
+    <div class="modal-window modal-lg" style="max-width:960px;">
+      <button class="modal-close" id="closeScreensNavigatorModal" onclick="closeScreensNavigatorModal()" aria-label="Fechar">✕</button>
+      <div class="modal-top">
+        <span class="modal-badge">MAPA DE INTERFACES • 30 TELAS</span>
+        <h2>Catálogo Geral de Telas do Artesio</h2>
+        <p>Baseado no planejamento acadêmico oficial (Documento de 30 Telas e Requisitos TCC). Navegue para qualquer tela com um clique.</p>
+      </div>
+      <div class="modal-main">
+        <div class="screens-catalog-grid" id="screensCatalogGrid">
+          <!-- Rendered dynamically via artesio-30-telas.js -->
+        </div>
+      </div>
+      <div class="modal-bottom">
+        <button class="btn-secondary" onclick="closeScreensNavigatorModal()">Fechar Navegador</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botão Flutuante (FAB) para Navegar nas 30 Telas -->
+  <button class="screens-nav-fab" id="btnOpenScreensNav" onclick="openScreensNavigatorModal()" title="Abrir Navegador das 30 Telas do TCC">
+    <span>🧭 Navegar 30 Telas</span>
+    <span class="fab-pill">30</span>
+  </button>
+
   <script src="app.js"></script>
+  <script src="artesio-30-telas.js"></script>
 </body>
 </html>

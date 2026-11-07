@@ -1,0 +1,436 @@
+/* ==========================================================================
+   ARTESIO 30 TELAS — CSS COMPLEMENTAR
+   Especificação baseada em: Artesio_Especificacao_30_Telas_Requisitos.docx
+   ========================================================================== */
+
+/* Badge de Tela e Identificação Visual Requisitos */
+.screen-header-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.screen-badge-id {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--brand-primary-light, #EEF2FF);
+  color: var(--brand-primary, #4F46E5);
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 4px 10px;
+  border-radius: var(--radius-full, 9999px);
+  border: 1px solid rgba(79, 70, 229, 0.2);
+}
+
+.screen-badge-scope {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-full, 9999px);
+}
+
+.badge-scope-mvp {
+  background: #ECFDF5;
+  color: #059669;
+  border: 1px solid #A7F3D0;
+}
+
+.badge-scope-future {
+  background: #FFFBEB;
+  color: #B45309;
+  border: 1px solid #FDE68A;
+}
+
+.screen-req-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+.req-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: #F1F5F9;
+  color: #475569;
+  border: 1px solid #E2E8F0;
+}
+.req-tag.rn {
+  background: #F0FDF4;
+  color: #166534;
+  border-color: #BBF7D0;
+}
+.req-tag.rnf {
+  background: #EFF6FF;
+  color: #1E40AF;
+  border-color: #BFDBFE;
+}
+
+/* Modal Seletor Geral de Telas (Navegador 30 Telas) */
+.screens-nav-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  background: linear-gradient(135deg, #4F46E5 0%, #3730A3 100%);
+  color: #FFFFFF;
+  padding: 12px 20px;
+  border-radius: 9999px;
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.88rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.screens-nav-fab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.45);
+}
+
+.screens-nav-fab .fab-pill {
+  background: rgba(255, 255, 255, 0.25);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+}
+
+/* Grade do Navegador de Telas */
+.screens-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 8px 4px;
+}
+
+.screen-card-item {
+  border: 1px solid var(--border-light, #E2E8F0);
+  background: #FFFFFF;
+  border-radius: var(--radius-md, 10px);
+  padding: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.screen-card-item:hover {
+  border-color: var(--brand-primary, #4F46E5);
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.08);
+  transform: translateY(-2px);
+}
+
+.screen-card-item.active {
+  border-color: var(--brand-primary, #4F46E5);
+  background: #F8FAFC;
+  box-shadow: 0 0 0 2px var(--brand-primary, #4F46E5);
+}
+
+.screen-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.screen-item-num {
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: var(--brand-primary, #4F46E5);
+}
+
+.screen-item-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-primary, #0F172A);
+  margin-bottom: 6px;
+}
+
+.screen-item-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted, #64748B);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.screen-item-area {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6366F1;
+}
+
+/* Componentes de Novas Telas */
+
+/* Tela 06: Planos e Benefícios */
+.pricing-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.pricing-card {
+  border: 1px solid var(--border-light, #E2E8F0);
+  background: #FFFFFF;
+  border-radius: var(--radius-lg, 14px);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.pricing-card:hover {
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  border-color: var(--brand-primary, #4F46E5);
+}
+
+.pricing-card.featured {
+  border: 2px solid var(--brand-primary, #4F46E5);
+  background: linear-gradient(180deg, #FAFAFE 0%, #FFFFFF 100%);
+}
+
+.pricing-card.featured::before {
+  content: "MAIS POPULAR";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--brand-primary, #4F46E5);
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  letter-spacing: 0.5px;
+}
+
+.pricing-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-primary, #0F172A);
+  margin-bottom: 6px;
+}
+
+.pricing-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted, #64748B);
+  margin-bottom: 20px;
+}
+
+.pricing-price {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-primary, #0F172A);
+  margin-bottom: 20px;
+}
+
+.pricing-price small {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted, #64748B);
+}
+
+.pricing-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pricing-features-list li {
+  font-size: 0.88rem;
+  color: var(--text-secondary, #334155);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pricing-features-list li.check::before {
+  content: "✓";
+  color: #059669;
+  font-weight: 800;
+}
+
+.pricing-features-list li.cross {
+  color: var(--text-subtle, #94A3B8);
+  text-decoration: line-through;
+}
+.pricing-features-list li.cross::before {
+  content: "✕";
+  color: #94A3B8;
+  font-weight: 700;
+}
+
+/* Carrinho e Checkout */
+.cart-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cart-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid var(--border-light, #E2E8F0);
+  gap: 16px;
+}
+
+.cart-item-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cart-item-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-md, 10px);
+  background: var(--bg-muted, #F1F5F9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: var(--brand-primary, #4F46E5);
+}
+
+.checkout-summary-box {
+  background: var(--bg-surface, #F8FAFC);
+  border: 1px solid var(--border-light, #E2E8F0);
+  border-radius: var(--radius-lg, 14px);
+  padding: 24px;
+}
+
+.checkout-row-cost {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: var(--text-secondary, #334155);
+}
+
+.checkout-row-cost.total {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary, #0F172A);
+  border-top: 1px dashed var(--border-medium, #CBD5E1);
+  padding-top: 14px;
+  margin-top: 14px;
+}
+
+/* Linha do Tempo / Timeline de Encomendas */
+.timeline-stages {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin: 30px 0 20px 0;
+}
+
+.timeline-stages::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  right: 20px;
+  height: 3px;
+  background: var(--border-light, #E2E8F0);
+  z-index: 1;
+}
+
+.timeline-step {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  flex: 1;
+}
+
+.timeline-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 3px solid var(--border-medium, #CBD5E1);
+  margin: 0 auto 8px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: var(--text-muted, #64748B);
+}
+
+.timeline-step.completed .timeline-dot {
+  border-color: #059669;
+  background: #059669;
+  color: #FFFFFF;
+}
+
+.timeline-step.current .timeline-dot {
+  border-color: var(--brand-primary, #4F46E5);
+  background: #FFFFFF;
+  color: var(--brand-primary, #4F46E5);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2);
+}
+
+.timeline-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted, #64748B);
+}
+
+.timeline-step.current .timeline-label {
+  color: var(--brand-primary, #4F46E5);
+  font-weight: 700;
+}
+
+/* Moderação e Autoria Humana Cards */
+.evidence-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light, #E2E8F0);
+  border-radius: var(--radius-md, 10px);
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.evidence-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.evidence-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-primary, #0F172A);
+}
+
