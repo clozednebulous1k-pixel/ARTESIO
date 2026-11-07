@@ -1,3 +1,20 @@
+
+/* OCULTAÇÃO TOTAL DE BADGES DE REQUISITOS E ESCOPO FUTURO/MVP */
+.screen-header-badge-row,
+.screen-badge-id,
+.screen-badge-scope,
+.badge-scope-mvp,
+.badge-scope-future,
+.screen-req-tags,
+.req-tag {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 /* ==========================================================================
    ARTESIO 30 TELAS — CSS COMPLEMENTAR
    Especificação baseada em: Artesio_Especificacao_30_Telas_Requisitos.docx
