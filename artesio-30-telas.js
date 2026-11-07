@@ -514,19 +514,12 @@ window.renderScreensNavigator = function() {
         <div>
           <div class="screen-item-top">
             <span class="screen-item-num">TELA ${s.num_str}</span>
-            <span class="screen-badge-scope ${isMvp ? 'badge-scope-mvp' : 'badge-scope-future'}">
-              ${isMvp ? '● Escopo MVP' : '○ Protótipo Futuro'}
-            </span>
+            <span class="screen-item-area" style="margin-bottom:0;">${s.area}</span>
           </div>
-          <div class="screen-item-area">${s.area}</div>
           <h4 class="screen-item-title">${s.title}</h4>
           <p class="screen-item-desc">${s.desc}</p>
         </div>
-        <div>
-          <div class="screen-req-tags">
-            <span class="req-tag">${s.rf}</span>
-            <span class="req-tag rn">${s.rn}</span>
-          </div>
+        <div style="margin-top:12px;">
           <button class="btn-secondary btn-block" style="font-size:0.78rem; padding:6px 10px;">Visualizar Tela ${s.num_str} →</button>
         </div>
       </div>
