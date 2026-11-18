@@ -523,8 +523,8 @@ window.renderScreensNavigator = function() {
     const isMvp = s.scope === "MVP";
     const isActive = s.num === currentNum;
     return `
-      <div class="screen-card-item ${isActive ? 'active' : ''}" onclick="navigateToScreen(${s.num})">
-        <div>
+      <div class="screen-card-item ${isActive ? 'active' : ''}">
+        <div onclick="navigateToScreen(${s.num})" style="cursor:pointer;">
           <div class="screen-item-top">
             <span class="screen-item-num">TELA ${s.num_str}</span>
             <span class="screen-item-area" style="margin-bottom:0;">${s.area}</span>
@@ -532,8 +532,9 @@ window.renderScreensNavigator = function() {
           <h4 class="screen-item-title">${s.title}</h4>
           <p class="screen-item-desc">${s.desc}</p>
         </div>
-        <div style="margin-top:12px;">
-          <button class="btn-secondary btn-block" style="font-size:0.78rem; padding:6px 10px;">Visualizar Tela ${s.num_str} →</button>
+        <div style="margin-top:12px; display:flex; gap:8px;">
+          <button class="btn-secondary" style="flex:1; font-size:0.78rem; padding:6px 10px;" onclick="navigateToScreen(${s.num})">Visualizar Tela ${s.num_str} →</button>
+          <button class="btn-secondary" style="font-size:0.78rem; padding:6px 10px; background:#F8FAFC;" onclick="downloadSpecificScreen(${s.num})" title="Baixar captura PNG desta tela">📸 Baixar</button>
         </div>
       </div>
     `;
@@ -671,3 +672,94 @@ window.renderFavoritesView = function() {
   `).join("");
 };
 
+
+
+// ==========================================================================
+// CAPTURA E DOWNLOAD DE TELAS (ALTA RESOLUÇÃO / PRINT INTEGRADO)
+// ==========================================================================
+
+window.downloadCurrentScreen = async function() {
+  const currentNum = getCurrentScreenNum();
+  const screenInfo = ARTESIO_SCREENS.find(s => s.num === currentNum) || {
+    num_str: String(currentNum).padStart(2, "0"),
+    title: "Tela_Artesio"
+  };
+
+  showToast(`Preparando captura da Tela ${screenInfo.num_str}: ${screenInfo.title}...`);
+
+  // Oculta temporariamente os FABs e modais de navegação para a captura sair limpa
+  const fabGroup = document.querySelector(".screens-nav-fab-group");
+  const navModal = document.getElementById("screensNavigatorModal");
+  if (fabGroup) fabGroup.style.display = "none";
+  if (navModal) navModal.style.display = "none";
+
+  // Identifica elemento a ser capturado: se houver modal aberto de detalhe de obra/auth/etc, captura a janela ou o body
+  let targetElement = document.body;
+  const activeModalWindow = document.querySelector(".modal-overlay[style*='display: flex'] .modal-window, .modal-overlay[style*='display: block'] .modal-window");
+  
+  try {
+    if (typeof html2canvas === "undefined") {
+      throw new Error("Biblioteca html2canvas não encontrada.");
+    }
+
+    const canvas = await html2canvas(targetElement, {
+      scale: 2, // 2x para alta definição (Retina / Figma ready)
+      useCORS: true,
+      allowTaint: true,
+      logging: false,
+      scrollX: 0,
+      scrollY: -window.scrollY,
+      windowWidth: document.documentElement.offsetWidth,
+      windowHeight: document.documentElement.scrollHeight
+    });
+
+    const safeTitle = screenInfo.title.replace(/[^a-zA-Z0-9_-]/g, "_");
+    const fileName = `Artesio_Tela_${screenInfo.num_str}_${safeTitle}.png`;
+
+    const link = document.createElement("a");
+    link.download = fileName;
+    link.href = canvas.toDataURL("image/png");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    showToast(`✓ Tela ${screenInfo.num_str} baixada com sucesso!`);
+  } catch (err) {
+    console.error("Erro ao capturar tela:", err);
+    showToast("Erro ao gerar captura da tela.");
+  } finally {
+    if (fabGroup) fabGroup.style.display = "flex";
+  }
+};
+
+window.downloadSpecificScreen = async function(screenNum) {
+  const modal = document.getElementById("screensNavigatorModal");
+  if (modal) modal.style.display = "none";
+
+  navigateToScreen(screenNum);
+
+  // Aguarda 600ms para a tela renderizar e estilos se estabilizarem
+  setTimeout(async () => {
+    await downloadCurrentScreen();
+  }, 600);
+};
+
+window.downloadAllScreensZip = async function() {
+  const confirmMsg = confirm("Deseja iniciar o download sequencial das 30 telas em alta resolução?\nCada tela será aberta e salva como imagem PNG no seu computador.");
+  if (!confirmMsg) return;
+
+  const modal = document.getElementById("screensNavigatorModal");
+  if (modal) modal.style.display = "none";
+
+  showToast("Iniciando lote de 30 telas... Não feche a aba!");
+
+  for (let i = 1; i <= 30; i++) {
+    navigateToScreen(i);
+    // Tempo para carregamento de cada tela
+    await new Promise(r => setTimeout(r, 800));
+    await downloadCurrentScreen();
+    await new Promise(r => setTimeout(r, 400));
+  }
+
+  showToast("✓ Todas as telas foram capturadas e baixadas com sucesso!");
+};

@@ -2198,18 +2198,27 @@
           <!-- Rendered dynamically via artesio-30-telas.js -->
         </div>
       </div>
-      <div class="modal-bottom">
+      <div class="modal-bottom" style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
+        <button class="btn-primary" onclick="downloadAllScreensZip()" id="btnDownloadAllScreens" style="display:inline-flex; align-items:center; gap:6px;">
+          <span>📦 Baixar Todas as 30 Telas em Lote</span>
+        </button>
         <button class="btn-secondary" onclick="closeScreensNavigatorModal()">Fechar Navegador</button>
       </div>
     </div>
   </div>
 
-  <!-- Botão Flutuante (FAB) para Navegar nas 30 Telas -->
-  <button class="screens-nav-fab" id="btnOpenScreensNav" onclick="openScreensNavigatorModal()" title="Abrir Navegador das 30 Telas do TCC">
-    <span>🧭 Navegar 30 Telas</span>
-    <span class="fab-pill">30</span>
-  </button>
+  <!-- Botões Flutuantes (FAB) para Navegar e Baixar Telas -->
+  <div class="screens-nav-fab-group">
+    <button class="screens-download-fab" id="btnDownloadCurrentScreen" onclick="downloadCurrentScreen()" title="Baixar captura completa da tela atual em alta resolução (PNG)">
+      <span>📸 Baixar Tela Completa</span>
+    </button>
+    <button class="screens-nav-fab" id="btnOpenScreensNav" onclick="openScreensNavigatorModal()" title="Abrir Navegador das 30 Telas do TCC">
+      <span>🧭 Navegar 30 Telas</span>
+      <span class="fab-pill">30</span>
+    </button>
+  </div>
 
+  <script src="html2canvas.min.js"></script>
   <script src="app.js"></script>
   <script src="artesio-30-telas.js"></script>
 </body>
