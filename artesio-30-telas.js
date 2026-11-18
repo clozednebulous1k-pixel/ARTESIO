@@ -459,7 +459,7 @@ let FAVORITES_STATE = {
 };
 
 // Navegação direta para qualquer uma das 30 telas
-window.navigateToScreen = function(screenNum) {
+window.navigateToScreen = function (screenNum) {
   const scr = ARTESIO_SCREENS.find(s => s.num === screenNum);
   if (!scr) return;
 
@@ -513,7 +513,7 @@ window.navigateToScreen = function(screenNum) {
 };
 
 // Renderizar o catálogo do modal navegador 30 telas
-window.renderScreensNavigator = function() {
+window.renderScreensNavigator = function () {
   const container = document.getElementById("screensCatalogGrid");
   if (!container) return;
 
@@ -541,7 +541,7 @@ window.renderScreensNavigator = function() {
   }).join("");
 };
 
-window.openScreensNavigatorModal = function() {
+window.openScreensNavigatorModal = function () {
   const m = document.getElementById("screensNavigatorModal");
   if (m) {
     m.style.display = "flex";
@@ -549,7 +549,7 @@ window.openScreensNavigatorModal = function() {
   }
 };
 
-window.closeScreensNavigatorModal = function() {
+window.closeScreensNavigatorModal = function () {
   const m = document.getElementById("screensNavigatorModal");
   if (m) m.style.display = "none";
 };
@@ -561,7 +561,7 @@ function getCurrentScreenNum() {
 }
 
 // Inicializações de renderizadores para as telas específicas adicionadas
-window.renderCartView = function() {
+window.renderCartView = function () {
   const body = document.getElementById("cartItemsBody");
   if (!body) return;
 
@@ -595,7 +595,7 @@ window.renderCartView = function() {
   updateCartTotals();
 };
 
-window.changeCartQty = function(id, delta) {
+window.changeCartQty = function (id, delta) {
   const it = CART_STATE.find(i => i.id === id);
   if (!it) return;
   it.quantity += delta;
@@ -606,13 +606,13 @@ window.changeCartQty = function(id, delta) {
   renderCartView();
 };
 
-window.removeCartItem = function(id) {
+window.removeCartItem = function (id) {
   CART_STATE = CART_STATE.filter(i => i.id !== id);
   renderCartView();
   showToast("Item removido do carrinho.");
 };
 
-window.updateCartTotals = function() {
+window.updateCartTotals = function () {
   const subtotal = CART_STATE.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const protectionFee = subtotal > 0 ? (subtotal * 0.10) : 0;
   const shipping = subtotal > 0 ? 25.00 : 0;
@@ -629,7 +629,7 @@ window.updateCartTotals = function() {
   if (totEl) totEl.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
 };
 
-window.proceedToCheckout = function() {
+window.proceedToCheckout = function () {
   if (CART_STATE.length === 0) {
     showToast("Adicione itens ao carrinho antes de continuar.");
     return;
@@ -637,7 +637,7 @@ window.proceedToCheckout = function() {
   switchView('checkout');
 };
 
-window.finishSimulatedCheckout = function() {
+window.finishSimulatedCheckout = function () {
   showToast("✅ Pagamento Pix simulado com sucesso! Pedido confirmado.");
   CART_STATE = [];
   setTimeout(() => {
@@ -645,7 +645,7 @@ window.finishSimulatedCheckout = function() {
   }, 1000);
 };
 
-window.renderFavoritesView = function() {
+window.renderFavoritesView = function () {
   const grid = document.getElementById("favoritesArtworksGrid");
   if (!grid) return;
 
@@ -678,43 +678,70 @@ window.renderFavoritesView = function() {
 // CAPTURA E DOWNLOAD DE TELAS (ALTA RESOLUÇÃO / PRINT INTEGRADO)
 // ==========================================================================
 
-window.downloadCurrentScreen = async function() {
+window.downloadCurrentScreen = async function () {
   const currentNum = getCurrentScreenNum();
   const screenInfo = ARTESIO_SCREENS.find(s => s.num === currentNum) || {
     num_str: String(currentNum).padStart(2, "0"),
     title: "Tela_Artesio"
   };
 
-  showToast(`Preparando captura da Tela ${screenInfo.num_str}: ${screenInfo.title}...`);
+  showToast(`Preparando captura Desktop (1440px) da Tela ${screenInfo.num_str}: ${screenInfo.title}...`);
 
   // Oculta temporariamente os FABs e modais de navegação para a captura sair limpa
   const fabGroup = document.querySelector(".screens-nav-fab-group");
   const navModal = document.getElementById("screensNavigatorModal");
+  const toastEl = document.getElementById("toast");
   if (fabGroup) fabGroup.style.display = "none";
   if (navModal) navModal.style.display = "none";
+  if (toastEl) toastEl.style.display = "none";
 
-  // Identifica elemento a ser capturado: se houver modal aberto de detalhe de obra/auth/etc, captura a janela ou o body
   let targetElement = document.body;
-  const activeModalWindow = document.querySelector(".modal-overlay[style*='display: flex'] .modal-window, .modal-overlay[style*='display: block'] .modal-window");
-  
+
   try {
     if (typeof html2canvas === "undefined") {
       throw new Error("Biblioteca html2canvas não encontrada.");
     }
 
+    // Configuração desktop estrita para garantir proporção de monitor/desktop (1440px)
+    const desktopWidth = 1440;
+
     const canvas = await html2canvas(targetElement, {
-      scale: 2, // 2x para alta definição (Retina / Figma ready)
+      scale: 1.5, // Resolução nítida para apresentações e Figma
       useCORS: true,
       allowTaint: true,
       logging: false,
-      scrollX: 0,
-      scrollY: -window.scrollY,
-      windowWidth: document.documentElement.offsetWidth,
-      windowHeight: document.documentElement.scrollHeight
+      windowWidth: desktopWidth,
+      width: desktopWidth,
+      onclone: (clonedDoc) => {
+        // Força a viewport do documento clonado para largura Desktop (1440px)
+        const clonedBody = clonedDoc.body;
+        const clonedHtml = clonedDoc.documentElement;
+        
+        clonedHtml.style.width = desktopWidth + "px";
+        clonedHtml.style.minWidth = desktopWidth + "px";
+        clonedBody.style.width = desktopWidth + "px";
+        clonedBody.style.minWidth = desktopWidth + "px";
+        clonedBody.style.overflowX = "visible";
+
+        // Remove os botões de navegação e toast no clone
+        const clonedFab = clonedDoc.querySelector(".screens-nav-fab-group");
+        if (clonedFab) clonedFab.remove();
+        const clonedToast = clonedDoc.getElementById("toast");
+        if (clonedToast) clonedToast.remove();
+        const clonedModal = clonedDoc.getElementById("screensNavigatorModal");
+        if (clonedModal) clonedModal.remove();
+
+        // Garante que a barra de navegação superior expanda no formato desktop
+        const navContainer = clonedDoc.querySelector(".nav-container");
+        if (navContainer) {
+          navContainer.style.width = "100%";
+          navContainer.style.maxWidth = "1320px";
+        }
+      }
     });
 
     const safeTitle = screenInfo.title.replace(/[^a-zA-Z0-9_-]/g, "_");
-    const fileName = `Artesio_Tela_${screenInfo.num_str}_${safeTitle}.png`;
+    const fileName = `Artesio_Desktop_Tela_${screenInfo.num_str}_${safeTitle}.png`;
 
     const link = document.createElement("a");
     link.download = fileName;
@@ -723,16 +750,17 @@ window.downloadCurrentScreen = async function() {
     link.click();
     document.body.removeChild(link);
 
-    showToast(`✓ Tela ${screenInfo.num_str} baixada com sucesso!`);
+    showToast(`✓ Tela ${screenInfo.num_str} baixada em formato Desktop!`);
   } catch (err) {
     console.error("Erro ao capturar tela:", err);
     showToast("Erro ao gerar captura da tela.");
   } finally {
     if (fabGroup) fabGroup.style.display = "flex";
+    if (toastEl) toastEl.style.display = "";
   }
 };
 
-window.downloadSpecificScreen = async function(screenNum) {
+window.downloadSpecificScreen = async function (screenNum) {
   const modal = document.getElementById("screensNavigatorModal");
   if (modal) modal.style.display = "none";
 
@@ -744,7 +772,7 @@ window.downloadSpecificScreen = async function(screenNum) {
   }, 600);
 };
 
-window.downloadAllScreensZip = async function() {
+window.downloadAllScreensZip = async function () {
   const confirmMsg = confirm("Deseja iniciar o download sequencial das 30 telas em alta resolução?\nCada tela será aberta e salva como imagem PNG no seu computador.");
   if (!confirmMsg) return;
 
