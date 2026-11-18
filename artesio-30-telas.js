@@ -685,15 +685,16 @@ window.downloadCurrentScreen = async function () {
     title: "Tela_Artesio"
   };
 
-  showToast(`Preparando captura Desktop (1440px) da Tela ${screenInfo.num_str}: ${screenInfo.title}...`);
-
-  // Oculta temporariamente os FABs e modais de navegação para a captura sair limpa
+  // Oculta imediatamente os FABs, avisos e modais de navegação para a captura sair 100% limpa
   const fabGroup = document.querySelector(".screens-nav-fab-group");
   const navModal = document.getElementById("screensNavigatorModal");
-  const toastEl = document.getElementById("toast");
+  const toastNotification = document.getElementById("toastNotification");
   if (fabGroup) fabGroup.style.display = "none";
   if (navModal) navModal.style.display = "none";
-  if (toastEl) toastEl.style.display = "none";
+  if (toastNotification) {
+    toastNotification.style.display = "none";
+    toastNotification.style.visibility = "hidden";
+  }
 
   let targetElement = document.body;
 
@@ -723,10 +724,10 @@ window.downloadCurrentScreen = async function () {
         clonedBody.style.minWidth = desktopWidth + "px";
         clonedBody.style.overflowX = "visible";
 
-        // Remove os botões de navegação e toast no clone
+        // Remove os botões de navegação, toast e modais no clone
         const clonedFab = clonedDoc.querySelector(".screens-nav-fab-group");
         if (clonedFab) clonedFab.remove();
-        const clonedToast = clonedDoc.getElementById("toast");
+        const clonedToast = clonedDoc.getElementById("toastNotification");
         if (clonedToast) clonedToast.remove();
         const clonedModal = clonedDoc.getElementById("screensNavigatorModal");
         if (clonedModal) clonedModal.remove();
@@ -750,13 +751,18 @@ window.downloadCurrentScreen = async function () {
     link.click();
     document.body.removeChild(link);
 
-    showToast(`✓ Tela ${screenInfo.num_str} baixada em formato Desktop!`);
+    // Restaura toast apenas APÓS o arquivo já ter sido gerado e baixado
+    setTimeout(() => {
+      showToast(`✓ Tela ${screenInfo.num_str} baixada com sucesso!`);
+    }, 150);
   } catch (err) {
     console.error("Erro ao capturar tela:", err);
     showToast("Erro ao gerar captura da tela.");
   } finally {
     if (fabGroup) fabGroup.style.display = "flex";
-    if (toastEl) toastEl.style.display = "";
+    if (toastNotification) {
+      toastNotification.style.visibility = "";
+    }
   }
 };
 
