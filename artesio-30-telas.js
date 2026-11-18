@@ -478,10 +478,14 @@ window.navigateToScreen = function(screenNum) {
     return;
   }
   if (scr.viewTarget === "artworkDetail") {
+    switchView("marketplace");
     if (window.openArtworkDetail) {
       const targetId = (typeof COMMISSIONS_DATA !== "undefined" && COMMISSIONS_DATA.length > 0) ? COMMISSIONS_DATA[0].id : 1;
-      window.openArtworkDetail(targetId);
+      setTimeout(() => {
+        window.openArtworkDetail(targetId);
+      }, 50);
     }
+    showToast(`Visualizando Tela 05: Detalhes da obra`);
     return;
   }
   if (scr.viewTarget === "newArtworkModal") {
@@ -490,6 +494,15 @@ window.navigateToScreen = function(screenNum) {
   }
   if (scr.viewTarget === "accountSettings") {
     if (window.openChangePasswordModal) window.openChangePasswordModal();
+    return;
+  }
+  if (scr.viewTarget === "adminUsers") {
+    switchView("admin");
+    setTimeout(() => {
+      const sec = document.getElementById("adminUsersBody");
+      if (sec) sec.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 100);
+    showToast(`Navegando para Tela ${scr.num_str}: ${scr.title}`);
     return;
   }
 
