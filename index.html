@@ -639,70 +639,54 @@
     <div class="container view-container">
       <div class="view-header-row">
         <div>
-          <span class="section-kicker">MONETIZAÇÃO SAAS TRANSPARENTE</span>
+          <span class="section-kicker">MONETIZAÇÃO SAAS INDIVIDUAL (TCC QUADRO 8 A 10)</span>
           <h2 class="view-title">Planos e Benefícios Artesio</h2>
-          <p class="view-desc">Sem comissão sobre o trabalho artístico (0% de comissão). Escolha o plano com os recursos de gestão e personalização ideais para o seu momento profissional.</p>
+          <p class="view-desc">Estrutura comercial focada exclusivamente em artistas individuais: Ateliê (gratuito) e Pro (avançado). Sem plano coletivo ou divisão compartilhada.</p>
         </div>
         <div class="header-action">
           <button class="btn-secondary" onclick="switchView('marketplace')">← Voltar</button>
         </div>
       </div>
 
-      <div class="pricing-cards-grid">
+      <div class="pricing-cards-grid" style="max-width:880px; margin-left:auto; margin-right:auto;">
         <!-- Plano Ateliê -->
         <div class="pricing-card">
           <div>
             <h3 class="pricing-title">Ateliê</h3>
-            <p class="pricing-sub">Para quem está começando a vender e organizar suas encomendas.</p>
+            <p class="pricing-sub">Modalidade individual gratuita para iniciantes e alunos Senac.</p>
             <div class="pricing-price">R$ 0 <small>/mês (Gratuito)</small></div>
             <ul class="pricing-features-list">
-              <li class="check">Vitrine física e pronta-entrega</li>
-              <li class="check">Até 3 encomendas ativas no mês</li>
-              <li class="check">Link básico para Bio das redes</li>
-              <li class="check">Proteção de pagamento Pix (10% ao comprador)</li>
-              <li class="cross">Controle de faturamento anual MEI</li>
-              <li class="cross">Estatísticas detalhadas de conversão</li>
+              <li class="check">Vitrine física: até 5 obras simultâneas</li>
+              <li class="check">Comissão de intermediação: 10% sobre vendas</li>
+              <li class="check">Pagamento Pix integrado via PagBank</li>
+              <li class="check">Envio físico com frete e rastreio sob responsabilidade do artista</li>
+              <li class="check">Link individual de portfólio para bio</li>
+              <li class="cross">Controle de faturamento anual do teto MEI</li>
+              <li class="cross">Estatísticas detalhadas de conversão e visitas</li>
               <li class="cross">Personalização estética avançada do portfólio</li>
             </ul>
           </div>
-          <button class="btn-secondary btn-block" onclick="showToast('Plano Ateliê ativo por padrão.')">Seu Plano Atual</button>
+          <button class="btn-secondary btn-block" onclick="showToast('Plano Ateliê individual ativo por padrão.')">Seu Plano Atual</button>
         </div>
 
         <!-- Plano Pro -->
         <div class="pricing-card featured">
           <div>
+            <span class="badge-accent" style="margin-bottom:8px; display:inline-block;">RECOMENDADO</span>
             <h3 class="pricing-title">Pro</h3>
-            <p class="pricing-sub">Para artistas profissionais com fluxo contínuo de encomendas.</p>
-            <div class="pricing-price">R$ 29 <small>/mês</small></div>
+            <p class="pricing-sub">Para artistas individuais com produção contínua de peças físicas.</p>
+            <div class="pricing-price">R$ 29,99 <small>/mês (Renovação manual via Pix)</small></div>
             <ul class="pricing-features-list">
-              <li class="check">Encomendas ilimitadas na fila</li>
-              <li class="check">Painel de controle financeiro do teto MEI</li>
-              <li class="check">Estatísticas privadas de acessos e conversão</li>
-              <li class="check">Personalização visual com temas e cores</li>
-              <li class="check">Selo Artista Verificado Pro</li>
-              <li class="check">Suporte prioritário na moderação</li>
-              <li class="cross">Múltiplos artistas (Gestão de Coletivo)</li>
+              <li class="check"><strong>Obras ilimitadas</strong> na vitrine física</li>
+              <li class="check"><strong>Comissão reduzida de 5%</strong> sobre vendas</li>
+              <li class="check">Painel de controle financeiro do teto MEI (R$ 81k)</li>
+              <li class="check">Estatísticas privadas de acessos, engajamento e conversão</li>
+              <li class="check">Personalização visual com temas e cores exclusivas</li>
+              <li class="check">Selo de Artista Humano Verificado Pro</li>
+              <li class="check">Suporte prioritário na auditoria e moderação</li>
             </ul>
           </div>
-          <button class="btn-primary btn-block" onclick="showToast('Assinatura Pro simulada com sucesso!')">Assinar Plano Pro (Simulação)</button>
-        </div>
-
-        <!-- Plano Estúdio -->
-        <div class="pricing-card">
-          <div>
-            <h3 class="pricing-title">Estúdio</h3>
-            <p class="pricing-sub">Para coletivos artísticos, estúdios independentes e guildas.</p>
-            <div class="pricing-price">R$ 69 <small>/mês</small></div>
-            <ul class="pricing-features-list">
-              <li class="check">Tudo do Plano Pro</li>
-              <li class="check">Cadastro de até 5 artistas sob o mesmo coletivo</li>
-              <li class="check">Painel consolidado de faturamento e divisão</li>
-              <li class="check">Links bio personalizados para cada membro</li>
-              <li class="check">Fila de espera compartilhada da guilda</li>
-              <li class="check">Exportação de relatórios contábeis para contador</li>
-            </ul>
-          </div>
-          <button class="btn-secondary btn-block" onclick="showToast('Assinatura Estúdio simulada com sucesso!')">Assinar Plano Estúdio</button>
+          <button class="btn-primary btn-block" onclick="showToast('Assinatura individual Pro (R$ 29,99/mês) simulada via Pix!')">Assinar Plano Pro (Simulação Pix)</button>
         </div>
       </div>
     </div>
@@ -830,9 +814,9 @@
     <div class="container view-container">
       <div class="view-header-row">
         <div>
-          <span class="section-kicker">CUSTÓDIA E PROTEÇÃO DE COMPRA</span>
-          <h2 class="view-title">Checkout e Pagamento Seguro Pix</h2>
-          <p class="view-desc">Composição transparente de valores conforme o TCC Artesio (Capítulo 3 e 4.2). Simulação protegida sem cobrança bancária real.</p>
+          <span class="section-kicker">PAGAMENTO PIX VIA PAGBANK &amp; LOGÍSTICA FÍSICA</span>
+          <h2 class="view-title">Checkout e Pagamento Pix (PagBank)</h2>
+          <p class="view-desc">Fluxo de compra de obra física: solicitação ao PagBank, geração de Pix, controle de estoque e envio manual pelo artista.</p>
         </div>
         <div class="header-action">
           <button class="btn-secondary" onclick="switchView('cart')">← Voltar ao Carrinho</button>
@@ -865,44 +849,47 @@
                 <input type="text" class="form-input" value="04696-000" readonly>
               </div>
             </div>
+            <div style="margin-top:12px; font-size:0.84rem; color:#64748B; background:#F8FAFC; padding:10px 14px; border-radius:6px; border:1px solid #E2E8F0;">
+              ℹ️ <strong>Responsabilidade de Envio:</strong> A cotação, embalagem segura e postagem física permanecem sob responsabilidade do artista vendedor (com envio manual de comprovante e código de rastreio).
+            </div>
           </div>
 
           <div class="panel-box-header" style="border-top:1px solid #E2E8F0; margin-top:20px;">
-            <h3>2. Meio de Pagamento: Pix Protegido com Custódia</h3>
+            <h3>2. Meio de Pagamento: Pix Integrado (PagBank)</h3>
           </div>
           <div style="padding:16px; background:#F8FAFC;">
             <div style="display:flex; align-items:center; gap:16px;">
-              <div style="width:100px; height:100px; background:#FFFFFF; border:2px solid #CBD5E1; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800; color:#4F46E5; font-size:0.8rem; text-align:center;">
-                QR CODE PIX<br>(SIMULADO)
+              <div style="width:110px; height:110px; background:#FFFFFF; border:2px solid #CBD5E1; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800; color:#4F46E5; font-size:0.78rem; text-align:center; padding:6px;">
+                QR CODE PIX<br>PAGBANK<br>(SIMULADO)
               </div>
               <div>
-                <strong>Chave Pix Copia e Cola (Demonstrativa):</strong>
-                <p style="font-family:monospace; background:#E2E8F0; padding:6px 10px; border-radius:6px; font-size:0.8rem; margin:6px 0;">00020126580014br.gov.bcb.pix0136artesio-tcc-pix-custodia-simulada</p>
-                <small style="color:#059669; font-weight:600;">✓ Valor retido em conta escrow do Artesio até confirmação de envio pelo artista.</small>
+                <strong>Chave Pix Copia e Cola (PagBank Gateway):</strong>
+                <p style="font-family:monospace; background:#E2E8F0; padding:6px 10px; border-radius:6px; font-size:0.8rem; margin:6px 0;">00020126580014br.gov.bcb.pix0136artesio-pagbank-gateway-simulacao-tcc</p>
+                <small style="color:#059669; font-weight:600;">✓ Notificação automática de webhook: confirmação em tempo real e atualização de estoque.</small>
               </div>
             </div>
           </div>
         </div>
 
         <div class="checkout-summary-box">
-          <h3 style="margin-bottom:16px;">Resumo Financeiro</h3>
+          <h3 style="margin-bottom:16px;">Resumo Financeiro (PagBank)</h3>
           <div class="checkout-row-cost">
-            <span>Repasse do Artista (100%):</span>
+            <span>Valor da Obra Física:</span>
             <strong>R$ 390,00</strong>
           </div>
           <div class="checkout-row-cost">
-            <span>Taxa do Artesio (10%):</span>
-            <strong style="color:#059669;">R$ 39,00</strong>
+            <span>Taxa Operacional Pix (PagBank 1,89%):</span>
+            <strong style="color:#475569;">R$ 7,37</strong>
           </div>
           <div class="checkout-row-cost">
-            <span>Frete Físico:</span>
+            <span>Frete Físico (Combinado com Artista):</span>
             <strong>R$ 25,00</strong>
           </div>
           <div class="checkout-row-cost total">
             <span>Total da Operação:</span>
-            <span style="color:#4F46E5;">R$ 454,00</span>
+            <span style="color:#4F46E5;">R$ 422,37</span>
           </div>
-          <button class="btn-primary btn-block" style="margin-top:20px;" onclick="finishSimulatedCheckout()">Confirmar Pagamento Simulado ✓</button>
+          <button class="btn-primary btn-block" style="margin-top:20px;" onclick="finishSimulatedCheckout()">Simular Confirmação Pix (Webhook PagBank) ✓</button>
         </div>
       </div>
     </div>
@@ -913,9 +900,9 @@
     <div class="container view-container">
       <div class="view-header-row">
         <div>
-          <span class="section-kicker">STATUS DA COMPRA FÍSICA</span>
+          <span class="section-kicker">COMPROVAÇÃO DE LOGÍSTICA FÍSICA &amp; PAGBANK</span>
           <h2 class="view-title">Acompanhamento do Pedido #ART-2026-88</h2>
-          <p class="view-desc">Visão transparente do rastreio, dados da postagem por conta do artista e garantia de custódia.</p>
+          <p class="view-desc">Status da operação: pagamento confirmado via PagBank, postagem física sob responsabilidade do artista e rastreamento.</p>
         </div>
         <div class="header-action">
           <button class="btn-secondary" onclick="switchView('client')">← Voltar ao Painel</button>
@@ -925,33 +912,45 @@
       <div class="timeline-stages">
         <div class="timeline-step completed">
           <div class="timeline-dot">✓</div>
-          <span class="timeline-label">1. Pagamento Retido</span>
+          <span class="timeline-label">1. PagBank Confirmado</span>
         </div>
         <div class="timeline-step completed">
           <div class="timeline-dot">✓</div>
-          <span class="timeline-label">2. Embalagem e Preparo</span>
+          <span class="timeline-label">2. Embalagem pelo Artista</span>
         </div>
         <div class="timeline-step current">
           <div class="timeline-dot">●</div>
-          <span class="timeline-label">3. Objeto Postado</span>
+          <span class="timeline-label">3. Postagem Realizada</span>
         </div>
         <div class="timeline-step">
           <div class="timeline-dot">○</div>
-          <span class="timeline-label">4. Entregue e Liberado</span>
+          <span class="timeline-label">4. Recebimento Confirmado</span>
         </div>
       </div>
 
       <div class="panel-box">
         <div class="panel-box-header">
-          <h3>Informações de Envio dos Correios</h3>
-          <span class="badge-accent">Código de Rastreio: BR789012345SP</span>
+          <div>
+            <h3>Comprovante de Envio e Rastreamento</h3>
+            <p class="panel-sub">Responsabilidade física do artista vendedor (postagem manual com código de rastreio).</p>
+          </div>
+          <span class="badge-accent">Rastreio: BR789012345SP</span>
         </div>
         <div style="padding:16px;">
-          <p><strong>Artista Remetente:</strong> Mayumi Art (@mayumi_arts)</p>
-          <p><strong>Objeto:</strong> Quadro Original Pintura a Óleo - Aurora (30x40 cm) com moldura de proteção.</p>
-          <p><strong>Previsão de Chegada:</strong> 4 dias úteis (Sedex).</p>
-          <div style="margin-top:16px; background:#ECFDF5; border:1px solid #A7F3D0; padding:12px; border-radius:8px; color:#065F46;">
-            <strong>Garantia Artesio ativa:</strong> Se o produto chegar danificado ou não for entregue, solicite intervenção pelo botão de suporte antes de liberar a custódia.
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:14px;">
+            <div>
+              <p><strong>Artista Remetente:</strong> Mayumi Art (@mayumi_arts)</p>
+              <p><strong>Item Físico:</strong> Pintura em Tela - Aurora (30x40 cm) embalada com plástico bolha e cantoneiras.</p>
+              <p><strong>Comprovante PagBank:</strong> ID #PAG-8839201-PIX (Confirmado)</p>
+            </div>
+            <div>
+              <p><strong>Forma de Transporte:</strong> Envio físico (Correios / Sedex)</p>
+              <p><strong>Previsão de Entrega:</strong> 3 a 5 dias úteis</p>
+              <p><strong>Situação do Rastreio:</strong> Objeto postado em agência pelo artista.</p>
+            </div>
+          </div>
+          <div style="background:#F0FDF4; border:1px solid #BBF7D0; padding:12px; border-radius:8px; color:#166534; font-size:0.88rem;">
+            <strong>Histórico de Eventos:</strong> Pagamento Pix identificado pelo PagBank e registrado pelo Artesio. O artista gerou a postagem física e anexou o comprovante de envio ao pedido.
           </div>
         </div>
       </div>
@@ -1228,7 +1227,7 @@
         <div>
           <span class="section-kicker">MÉTRICAS PRIVADAS DO ARTISTA</span>
           <h2 class="view-title">Estatísticas do Portfólio</h2>
-          <p class="view-desc">Métricas confidenciais para assinantes Pro e Estúdio. Nunca utilizadas para ranquear ou punir artistas publicamente.</p>
+          <p class="view-desc">Métricas confidenciais para assinantes do Plano Pro. Informações de acessos e conversão individuais para apoiar sua precificação física.</p>
         </div>
         <div class="header-action">
           <button class="btn-secondary" onclick="switchView('artist')">← Portal do Artista</button>
@@ -1294,7 +1293,7 @@
         <div>
           <span class="section-kicker">CUSTOMIZAÇÃO ESTÉTICA</span>
           <h2 class="view-title">Personalização do Portfólio</h2>
-          <p class="view-desc">Configure o tema de cores, banner e disposição das obras no seu link público para clientes (Planos Pro e Estúdio).</p>
+          <p class="view-desc">Configure o tema de cores, banner e disposição das obras no seu link público para clientes (Exclusivo do Plano Pro).</p>
         </div>
         <div class="header-action">
           <button class="btn-primary" onclick="showToast('Configurações visuais salvas no perfil!')">Salvar Alterações</button>
@@ -1774,8 +1773,8 @@
             </div>
           </div>
           <div class="form-block" id="registerHandleBlock" style="display:none;">
-            <label class="form-label" for="registerHandle">Handle do artista:</label>
-            <input type="text" id="registerHandle" class="form-input" placeholder="@meu_estudio">
+            <label class="form-label" for="registerHandle">Handle do artista (Individual):</label>
+            <input type="text" id="registerHandle" class="form-input" placeholder="@meu_perfil">
           </div>
           <div class="form-row-2">
             <div class="form-block">

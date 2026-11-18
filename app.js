@@ -732,7 +732,7 @@ window.loginAs = function(role, customName, customHandle) {
       avatar: customName.charAt(0).toUpperCase()
     };
     USERS_DATA.push(user);
-    ensureArtistProfile(customHandle, { bio: `Estúdio de ${customName}.` });
+    ensureArtistProfile(customHandle, { bio: `Ateliê individual de ${customName}.` });
   }
 
   if (!user) {
