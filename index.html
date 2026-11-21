@@ -952,10 +952,53 @@
           <div style="background:#F0FDF4; border:1px solid #BBF7D0; padding:12px; border-radius:8px; color:#166534; font-size:0.88rem;">
             <strong>Histórico de Eventos:</strong> Pagamento Pix identificado pelo PagBank e registrado pelo Artesio. O artista gerou a postagem física e anexou o comprovante de envio ao pedido.
           </div>
+          <div style="margin-top:16px; padding-top:16px; border-top:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+            <div>
+              <span style="font-size:0.85rem; color:#64748B;">Custódia PagBank retida até: <strong>26/11/2026</strong></span>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <button class="btn-secondary danger" style="padding:8px 14px; font-size:0.85rem;" onclick="showToast('Problema registrado. A custódia foi retida para análise de suporte.')">
+                ⚠️ Registrar Problema
+              </button>
+              <button class="btn-primary" style="padding:8px 16px; font-size:0.85rem;" onclick="openEvaluationModal()">
+                ✓ Confirmar Recebimento Físico
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Modal Avaliar Artista (RF22 & RN23) -->
+  <div class="modal-overlay" id="evaluationModal" style="display:none;">
+    <div class="modal-window" style="max-width:480px;">
+      <button class="modal-close" onclick="closeEvaluationModal()" aria-label="Fechar">✕</button>
+      <div class="modal-top">
+        <span class="modal-badge">AVALIAÇÃO CONFIRMADA (RF22)</span>
+        <h2>Avaliar Artista</h2>
+        <p>Seu recebimento físico foi confirmado e o repasse foi liberado ao artista. Avalie sua experiência com Mayumi Art:</p>
+      </div>
+      <div style="padding:20px;">
+        <div style="text-align:center; margin-bottom:20px;">
+          <label class="form-label" style="margin-bottom:8px;">Sua Nota (1 a 5 estrelas):</label>
+          <div style="font-size:2rem; cursor:pointer; color:#F59E0B; letter-spacing:4px;" id="starRatingSelector">
+            <span onclick="setStarRating(1)">★</span><span onclick="setStarRating(2)">★</span><span onclick="setStarRating(3)">★</span><span onclick="setStarRating(4)">★</span><span onclick="setStarRating(5)">★</span>
+          </div>
+          <small style="color:#64748B; display:block; margin-top:4px;" id="starRatingLabel">5 de 5 estrelas (Excelente)</small>
+        </div>
+
+        <div class="form-block">
+          <label class="form-label">Comentário sobre a peça e envio (opcional):</label>
+          <textarea class="form-input" rows="3" placeholder="Conte como foi o acabamento da pintura, a embalagem segura e o atendimento do artista..."></textarea>
+        </div>
+
+        <button class="btn-primary btn-block" style="margin-top:14px;" onclick="submitEvaluation()">
+          Publicar Avaliação ✓
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- ================= TELA 16: GERENCIAR PORTFÓLIO (MVP) ================= -->
   <section class="app-view" id="viewManagePortfolio" style="display:none;">
@@ -1161,6 +1204,82 @@
               </tr>
             </tbody>
           </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- ================= TELA 19: ASSINAR OU RENOVAR O PRO (MVP) ================= -->
+  <section class="app-view" id="viewSubscribePro" style="display:none;">
+    <div class="container view-container">
+      <div class="view-header-row">
+        <div>
+          <span class="section-kicker">ASSINATURA INDIVIDUAL PRO (TCC QUADRO 10 &amp; RN19)</span>
+          <h2 class="view-title">Assinar ou Renovar o Plano Pro</h2>
+          <p class="view-desc">Renovação manual mensal via Pix (R$ 29,99/mês), sem cobrança automática ou fidelidade. Mantenha obras ilimitadas e comissão reduzida de 5%.</p>
+        </div>
+        <div class="header-action">
+          <button class="btn-secondary" onclick="switchView('plans')">← Ver Comparativo</button>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1.2fr 1fr; gap:24px; max-width:980px; margin:0 auto;">
+        <!-- Card de Pagamento Pix -->
+        <div class="panel-box">
+          <div class="panel-box-header">
+            <h3>Pagamento da Mensalidade via Pix</h3>
+            <span class="badge-accent">R$ 29,99 / mês</span>
+          </div>
+          <div style="padding:20px;">
+            <div style="display:flex; align-items:center; gap:20px; margin-bottom:20px;">
+              <div style="width:130px; height:130px; background:#FFFFFF; border:2px solid #CBD5E1; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:800; color:#4F46E5; font-size:0.8rem; text-align:center; padding:8px;">
+                QR CODE PIX<br>PLANO PRO<br>R$ 29,99
+              </div>
+              <div style="flex:1;">
+                <label class="form-label" style="font-size:0.82rem; text-transform:uppercase;">Chave Pix Copia e Cola:</label>
+                <div style="display:flex; gap:8px;">
+                  <input type="text" class="form-input" style="font-family:monospace; font-size:0.8rem;" value="00020126580014br.gov.bcb.pix0136artesio-plano-pro-mensal-r2999" readonly>
+                  <button class="btn-secondary" onclick="showToast('Chave Pix copiada com sucesso!')">Copiar</button>
+                </div>
+                <small style="color:#64748B; display:block; margin-top:8px;">
+                  ⏳ <strong>Prazo do QR Code:</strong> Válido por 24 horas para ativação imediata.
+                </small>
+              </div>
+            </div>
+
+            <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:8px; padding:12px 16px; color:#92400E; font-size:0.85rem; line-height:1.45;">
+              ⚠️ <strong>Regra de Não Renovação (RN19):</strong> O plano Pro é pago antecipadamente e não renova automaticamente. Se não houver novo pagamento até a data de vencimento, sua conta retornará automaticamente ao <strong>Plano Ateliê</strong> e as obras excedentes ao limite de 5 ficarão ocultas na vitrine pública (preservadas no seu painel).
+            </div>
+
+            <div style="margin-top:20px; display:flex; gap:12px;">
+              <button class="btn-primary" style="flex:1;" onclick="showToast('✓ Pagamento de R$ 29,99 identificado via PagBank! Plano Pro ativo por 30 dias.'); switchView('artist');">
+                Simular Confirmação de Pagamento Pix ✓
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card de Benefícios e Vigência -->
+        <div class="panel-box">
+          <div class="panel-box-header">
+            <h3>Seu Status e Vigência</h3>
+          </div>
+          <div style="padding:20px;">
+            <div style="margin-bottom:18px;">
+              <span style="font-size:0.8rem; color:#64748B; text-transform:uppercase; font-weight:700;">Status Atual:</span>
+              <div style="font-size:1.1rem; font-weight:800; color:#4F46E5; margin-top:2px;">Plano Pro Ativo</div>
+              <small style="color:#059669; font-weight:600;">Vencimento da fatura atual: 19/12/2026</small>
+            </div>
+
+            <h4 style="font-size:0.9rem; font-weight:700; margin-bottom:10px; color:#0F172A;">Vantagens ativas com a renovação:</h4>
+            <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; font-size:0.85rem;">
+              <li style="display:flex; align-items:center; gap:8px; color:#047857;">✓ <strong>Comissão de 5%</strong> nas vendas concluídas (contra 10% do Ateliê)</li>
+              <li style="display:flex; align-items:center; gap:8px; color:#047857;">✓ <strong>Obras ilimitadas</strong> na vitrine física</li>
+              <li style="display:flex; align-items:center; gap:8px; color:#047857;">✓ Painel do MEI com teto anual de R$ 81k</li>
+              <li style="display:flex; align-items:center; gap:8px; color:#047857;">✓ Estatísticas privadas de alcance e conversão</li>
+              <li style="display:flex; align-items:center; gap:8px; color:#047857;">✓ Personalização de capa, cor e 3 obras fixadas</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

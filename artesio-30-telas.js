@@ -798,3 +798,47 @@ window.downloadAllScreensZip = async function () {
 
   showToast("✓ Todas as telas foram capturadas e baixadas com sucesso!");
 };
+
+// ==========================================================================
+// AVALIAÇÃO DE ARTISTA (TELA 14 - RF22 & RN23)
+// ==========================================================================
+
+let currentRating = 5;
+
+window.openEvaluationModal = function() {
+  const m = document.getElementById("evaluationModal");
+  if (m) m.style.display = "flex";
+  showToast("Recebimento confirmado! Repasse liberado ao artista.");
+};
+
+window.closeEvaluationModal = function() {
+  const m = document.getElementById("evaluationModal");
+  if (m) m.style.display = "none";
+};
+
+window.setStarRating = function(stars) {
+  currentRating = stars;
+  const container = document.getElementById("starRatingSelector");
+  const label = document.getElementById("starRatingLabel");
+  if (container) {
+    const starSpans = container.querySelectorAll("span");
+    starSpans.forEach((s, idx) => {
+      s.style.color = (idx < stars) ? "#F59E0B" : "#CBD5E1";
+    });
+  }
+  if (label) {
+    const texts = {
+      1: "1 de 5 estrelas (Muito insatisfeito)",
+      2: "2 de 5 estrelas (Insatisfeito)",
+      3: "3 de 5 estrelas (Regular)",
+      4: "4 de 5 estrelas (Bom)",
+      5: "5 de 5 estrelas (Excelente)"
+    };
+    label.textContent = texts[stars] || `${stars} de 5 estrelas`;
+  }
+};
+
+window.submitEvaluation = function() {
+  closeEvaluationModal();
+  showToast(`✓ Avaliação de ${currentRating} estrelas enviada com sucesso! A média do artista foi atualizada.`);
+};
