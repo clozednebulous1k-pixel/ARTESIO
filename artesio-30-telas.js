@@ -614,9 +614,10 @@ window.removeCartItem = function (id) {
 
 window.updateCartTotals = function () {
   const subtotal = CART_STATE.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const protectionFee = subtotal > 0 ? (subtotal * 0.10) : 0;
+  // Tarifa referencial de operação Pix PagBank: 1,89% (TCC Quadro 8 e 9)
+  const pagbankFee = subtotal > 0 ? (subtotal * 0.0189) : 0;
   const shipping = subtotal > 0 ? 25.00 : 0;
-  const total = subtotal + protectionFee + shipping;
+  const total = subtotal + pagbankFee + shipping;
 
   const subEl = document.getElementById("cartSubtotal");
   const feeEl = document.getElementById("cartProtectionFee");
@@ -624,7 +625,7 @@ window.updateCartTotals = function () {
   const totEl = document.getElementById("cartTotal");
 
   if (subEl) subEl.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-  if (feeEl) feeEl.textContent = `R$ ${protectionFee.toFixed(2).replace('.', ',')}`;
+  if (feeEl) feeEl.textContent = `R$ ${pagbankFee.toFixed(2).replace('.', ',')}`;
   if (shipEl) shipEl.textContent = `R$ ${shipping.toFixed(2).replace('.', ',')}`;
   if (totEl) totEl.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
 };
