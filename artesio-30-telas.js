@@ -793,19 +793,6 @@ window.captureScreenCanvas = async function (screenNum) {
   const scr = ARTESIO_SCREENS.find(s => s.num === screenNum);
   if (!scr) return null;
 
-  // Oculta temporariamente os FABs e modais de navegação
-  const fabGroup = document.querySelector(".screens-nav-fab-group");
-  const navModal = document.getElementById("screensNavigatorModal");
-  const toastNotification = document.getElementById("toastNotification");
-  if (fabGroup) fabGroup.style.display = "none";
-  if (navModal) navModal.style.display = "none";
-  if (toastNotification) {
-    toastNotification.style.display = "none";
-    toastNotification.style.visibility = "hidden";
-  }
-
-  let targetElement = document.body;
-
   try {
     if (typeof html2canvas === "undefined") {
       throw new Error("Biblioteca html2canvas não encontrada.");
@@ -813,7 +800,7 @@ window.captureScreenCanvas = async function (screenNum) {
 
     const desktopWidth = 1440;
 
-    const canvas = await html2canvas(targetElement, {
+    const canvas = await html2canvas(document.body, {
       scale: 1.5,
       useCORS: true,
       allowTaint: true,
@@ -830,13 +817,23 @@ window.captureScreenCanvas = async function (screenNum) {
         clonedBody.style.minWidth = desktopWidth + "px";
         clonedBody.style.overflowX = "visible";
 
+        // Remove expressamente o modal de progresso do clone para NUNCA sair no print!
+        const clonedProgressModal = clonedDoc.getElementById("downloadZipProgressModal");
+        if (clonedProgressModal) clonedProgressModal.remove();
+
+        // Remove os botões flutuantes de navegação
         const clonedFab = clonedDoc.querySelector(".screens-nav-fab-group");
         if (clonedFab) clonedFab.remove();
+
+        // Remove o toast de notificação
         const clonedToast = clonedDoc.getElementById("toastNotification");
         if (clonedToast) clonedToast.remove();
-        const clonedModal = clonedDoc.getElementById("screensNavigatorModal");
-        if (clonedModal) clonedModal.remove();
 
+        // Remove o modal geral de navegação de 30 telas
+        const clonedNavModal = clonedDoc.getElementById("screensNavigatorModal");
+        if (clonedNavModal) clonedNavModal.remove();
+
+        // Garante que o header ocupe a largura desktop
         const navContainer = clonedDoc.querySelector(".nav-container");
         if (navContainer) {
           navContainer.style.width = "100%";
@@ -849,9 +846,6 @@ window.captureScreenCanvas = async function (screenNum) {
   } catch (err) {
     console.error(`Erro ao capturar tela ${screenNum}:`, err);
     return null;
-  } finally {
-    if (fabGroup) fabGroup.style.display = "flex";
-    if (toastNotification) toastNotification.style.visibility = "";
   }
 };
 
@@ -906,10 +900,24 @@ window.downloadAllScreensZip = async function () {
       if (progressPercent) progressPercent.textContent = `${pct}%`;
       if (progressCurrent) progressCurrent.textContent = `Capturando Tela ${s.num_str} de 30: ${s.title}`;
 
+      // Fecha qualquer modal aberto anteriormente para a tela sair limpa e individual
+      document.querySelectorAll(".modal-overlay").forEach(m => {
+        if (m.id !== "downloadZipProgressModal") {
+          m.style.display = "none";
+        }
+      });
+
       navigateToScreen(s.num);
-      await new Promise(r => setTimeout(r, 600));
+      await new Promise(r => setTimeout(r, 700));
 
       const canvas = await captureScreenCanvas(s.num);
+
+      // Fecha modais que possam ter sido abertos especificamente por essa tela (ex: auth, artworkDetail, etc.)
+      document.querySelectorAll(".modal-overlay").forEach(m => {
+        if (m.id !== "downloadZipProgressModal") {
+          m.style.display = "none";
+        }
+      });
       if (canvas) {
         const dataUrl = canvas.toDataURL("image/png");
         const base64Data = dataUrl.replace(/^data:image\/png;base64,/, "");
