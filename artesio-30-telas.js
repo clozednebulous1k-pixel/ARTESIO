@@ -779,24 +779,166 @@ window.downloadSpecificScreen = async function (screenNum) {
   }, 600);
 };
 
+window.captureScreenCanvas = async function (screenNum) {
+  const scr = ARTESIO_SCREENS.find(s => s.num === screenNum);
+  if (!scr) return null;
+
+  // Oculta temporariamente os FABs e modais de navegação
+  const fabGroup = document.querySelector(".screens-nav-fab-group");
+  const navModal = document.getElementById("screensNavigatorModal");
+  const toastNotification = document.getElementById("toastNotification");
+  if (fabGroup) fabGroup.style.display = "none";
+  if (navModal) navModal.style.display = "none";
+  if (toastNotification) {
+    toastNotification.style.display = "none";
+    toastNotification.style.visibility = "hidden";
+  }
+
+  let targetElement = document.body;
+
+  try {
+    if (typeof html2canvas === "undefined") {
+      throw new Error("Biblioteca html2canvas não encontrada.");
+    }
+
+    const desktopWidth = 1440;
+
+    const canvas = await html2canvas(targetElement, {
+      scale: 1.5,
+      useCORS: true,
+      allowTaint: true,
+      logging: false,
+      windowWidth: desktopWidth,
+      width: desktopWidth,
+      onclone: (clonedDoc) => {
+        const clonedBody = clonedDoc.body;
+        const clonedHtml = clonedDoc.documentElement;
+
+        clonedHtml.style.width = desktopWidth + "px";
+        clonedHtml.style.minWidth = desktopWidth + "px";
+        clonedBody.style.width = desktopWidth + "px";
+        clonedBody.style.minWidth = desktopWidth + "px";
+        clonedBody.style.overflowX = "visible";
+
+        const clonedFab = clonedDoc.querySelector(".screens-nav-fab-group");
+        if (clonedFab) clonedFab.remove();
+        const clonedToast = clonedDoc.getElementById("toastNotification");
+        if (clonedToast) clonedToast.remove();
+        const clonedModal = clonedDoc.getElementById("screensNavigatorModal");
+        if (clonedModal) clonedModal.remove();
+
+        const navContainer = clonedDoc.querySelector(".nav-container");
+        if (navContainer) {
+          navContainer.style.width = "100%";
+          navContainer.style.maxWidth = "1320px";
+        }
+      }
+    });
+
+    return canvas;
+  } catch (err) {
+    console.error(`Erro ao capturar tela ${screenNum}:`, err);
+    return null;
+  } finally {
+    if (fabGroup) fabGroup.style.display = "flex";
+    if (toastNotification) toastNotification.style.visibility = "";
+  }
+};
+
 window.downloadAllScreensZip = async function () {
-  const confirmMsg = confirm("Deseja iniciar o download sequencial das 30 telas em alta resolução?\nCada tela será aberta e salva como imagem PNG no seu computador.");
+  const confirmMsg = confirm(
+    "Deseja gerar e baixar a pasta ZIP com todas as 30 telas do Artesio?\n\n" +
+    "• Cada tela será capturada em alta resolução Desktop (1440px).\n" +
+    "• Cada imagem PNG virá acompanhada de um arquivo de texto com a descrição detalhada, elementos, requisitos e regras de negócio.\n" +
+    "• Um documento geral com o catálogo completo das 30 telas será incluído na pasta."
+  );
   if (!confirmMsg) return;
 
   const modal = document.getElementById("screensNavigatorModal");
   if (modal) modal.style.display = "none";
 
-  showToast("Iniciando lote de 30 telas... Não feche a aba!");
-
-  for (let i = 1; i <= 30; i++) {
-    navigateToScreen(i);
-    // Tempo para carregamento de cada tela
-    await new Promise(r => setTimeout(r, 800));
-    await downloadCurrentScreen();
-    await new Promise(r => setTimeout(r, 400));
+  if (typeof JSZip === "undefined") {
+    alert("Biblioteca JSZip não carregada. Verifique sua conexão ou recarregue a página.");
+    return;
   }
 
-  showToast("✓ Todas as telas foram capturadas e baixadas com sucesso!");
+  const zip = new JSZip();
+  const folder = zip.folder("Artesio_30_Telas_TCC");
+
+  showToast("Iniciando pacote com as 30 telas em lote... Aguarde sem fechar a aba.");
+
+  // Cria relatório consolidado em texto na pasta
+  let catalogoGeralTxt = "==============================================================================\n";
+  catalogoGeralTxt += "ARTESIO — CATÁLOGO GERAL DAS 30 TELAS (25 MVP + 5 TRABALHOS FUTUROS)\n";
+  catalogoGeralTxt += "Documento Oficial de Alinhamento: Artesio — Análise das telas (MVP e futuras)\n";
+  catalogoGeralTxt += "==============================================================================\n\n";
+
+  for (let i = 1; i <= ARTESIO_SCREENS.length; i++) {
+    const s = ARTESIO_SCREENS.find(item => item.num === i);
+    if (!s) continue;
+
+    showToast(`Capturando [${s.num_str}/30]: ${s.title}...`);
+
+    navigateToScreen(s.num);
+    await new Promise(r => setTimeout(r, 650));
+
+    const canvas = await captureScreenCanvas(s.num);
+    if (canvas) {
+      // Converte canvas para blob base64 sem cabeçalho
+      const dataUrl = canvas.toDataURL("image/png");
+      const base64Data = dataUrl.replace(/^data:image\/png;base64,/, "");
+
+      const safeTitle = s.title.replace(/[^a-zA-Z0-9_-]/g, "_");
+      const imgFileName = `Tela_${s.num_str}_${safeTitle}.png`;
+      const descFileName = `Tela_${s.num_str}_${safeTitle}_DESCRICAO.txt`;
+
+      // Adiciona PNG no ZIP
+      folder.file(imgFileName, base64Data, { base64: true });
+
+      // Adiciona TXT com descrição completa da tela
+      const telaDescTxt = 
+`==============================================================================
+TELA ${s.num_str}: ${s.title.toUpperCase()}
+==============================================================================
+• Área / Jornada: ${s.area}
+• Escopo do Projeto: ${s.scope}
+• Requisitos Atendidos: ${s.rf}
+• Regras de Negócio: ${s.rn}
+• Requisitos Não Funcionais: ${s.rnf}
+
+DESCRIÇÃO DA TELA:
+${s.desc}
+
+ELEMENTOS E INTERFACE:
+${s.elements}
+
+==============================================================================
+Artesio — Plataforma de Arte Física Universitária Independente
+`;
+      folder.file(descFileName, telaDescTxt);
+
+      catalogoGeralTxt += `------------------------------------------------------------------------------\n`;
+      catalogoGeralTxt += `TELA ${s.num_str}: ${s.title} [${s.scope}]\n`;
+      catalogoGeralTxt += `Área: ${s.area}\n`;
+      catalogoGeralTxt += `Requisitos: ${s.rf} | Regras: ${s.rn}\n`;
+      catalogoGeralTxt += `Descrição: ${s.desc}\n`;
+      catalogoGeralTxt += `Elementos: ${s.elements}\n\n`;
+    }
+  }
+
+  folder.file("00_CATALOGO_GERAL_30_TELAS.txt", catalogoGeralTxt);
+
+  showToast("Compactando pasta ZIP de alta resolução...");
+
+  const content = await zip.generateAsync({ type: "blob" });
+  const downloadLink = document.createElement("a");
+  downloadLink.href = URL.createObjectURL(content);
+  downloadLink.download = "Artesio_30_Telas_Completas_TCC.zip";
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+
+  showToast("✓ Pasta ZIP baixada com sucesso com todas as 30 telas e descrições!");
 };
 
 // ==========================================================================

@@ -101,6 +101,31 @@
   gap: 12px;
 }
 
+.screens-download-all-fab {
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+  color: #FFFFFF;
+  padding: 12px 18px;
+  border-radius: 9999px;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.88rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.screens-download-all-fab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.45);
+}
+
+.screens-download-all-fab:active {
+  transform: scale(0.97);
+}
+
 .screens-download-fab {
   background: linear-gradient(135deg, #10B981 0%, #059669 100%);
   color: #FFFFFF;
