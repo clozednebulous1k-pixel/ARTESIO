@@ -2325,6 +2325,32 @@
     </div>
   </div>
 
+  
+  <!-- Modal de Progresso do Download das 30 Telas -->
+  <div class="modal-overlay" id="downloadZipProgressModal" style="display:none; z-index:10000; background:rgba(15,23,42,0.85); backdrop-filter:blur(6px);">
+    <div class="modal-window" style="max-width:520px; text-align:center; padding:32px 24px; border-radius:18px;">
+      <div style="font-size:2.8rem; margin-bottom:12px;" id="zipProgressIcon">📦</div>
+      <h3 style="font-size:1.35rem; font-weight:800; color:#0F172A; margin-bottom:8px;" id="zipProgressTitle">Gerando Pasta ZIP das 30 Telas</h3>
+      <p style="font-size:0.9rem; color:#64748B; margin-bottom:20px;" id="zipProgressDesc">
+        Capturando telas em alta resolução Desktop (1440px) e gerando descrições textuais...
+      </p>
+
+      <!-- Barra de Progresso -->
+      <div style="background:#E2E8F0; border-radius:9999px; height:12px; overflow:hidden; margin-bottom:12px; border:1px solid #CBD5E1;">
+        <div id="zipProgressBar" style="width:0%; height:100%; background:linear-gradient(90deg, #4F46E5, #06B6D4); transition:width 0.25s ease;"></div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; font-size:0.82rem; font-weight:700; color:#475569;">
+        <span id="zipProgressCurrent">Tela 01 de 30</span>
+        <span id="zipProgressPercent">3%</span>
+      </div>
+
+      <div style="margin-top:20px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:12px; font-size:0.8rem; color:#64748B; text-align:left;">
+        ℹ️ <strong>Importante:</strong> Ao concluir 100%, o navegador iniciará automaticamente o download do arquivo <strong>Artesio_30_Telas_Completas_TCC.zip</strong> na sua pasta de Downloads.
+      </div>
+    </div>
+  </div>
+
   <!-- Botões Flutuantes (FAB) para Navegar e Baixar Telas -->
   <div class="screens-nav-fab-group">
     <button class="screens-download-all-fab" id="btnDownloadAllScreensFab" onclick="downloadAllScreensZip()" title="Baixar todas as 30 telas juntas em pasta ZIP com descrição completa">

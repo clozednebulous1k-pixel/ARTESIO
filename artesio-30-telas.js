@@ -488,6 +488,16 @@ window.navigateToScreen = function (screenNum) {
     showToast(`Visualizando Tela 05: Detalhes da obra`);
     return;
   }
+  if (scr.viewTarget === "artistProfile") {
+    if (!AppState.selectedArtistHandle) {
+      AppState.selectedArtistHandle = "@mayumi_arts";
+    }
+    switchView("artistProfile");
+    renderArtistProfile(AppState.selectedArtistHandle);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    showToast(`Visualizando Tela 04: Perfil público do artista`);
+    return;
+  }
   if (scr.viewTarget === "newArtworkModal") {
     if (window.openNewArtworkModal) window.openNewArtworkModal();
     return;
@@ -854,49 +864,65 @@ window.downloadAllScreensZip = async function () {
   );
   if (!confirmMsg) return;
 
-  const modal = document.getElementById("screensNavigatorModal");
-  if (modal) modal.style.display = "none";
+  const navModal = document.getElementById("screensNavigatorModal");
+  if (navModal) navModal.style.display = "none";
 
   if (typeof JSZip === "undefined") {
-    alert("Biblioteca JSZip não carregada. Verifique sua conexão ou recarregue a página.");
+    alert("Biblioteca JSZip não carregada. Por favor, recarregue a página com Ctrl+F5 e tente novamente.");
     return;
+  }
+
+  // Abre modal de progresso em tempo real
+  const progressModal = document.getElementById("downloadZipProgressModal");
+  const progressBar = document.getElementById("zipProgressBar");
+  const progressTitle = document.getElementById("zipProgressTitle");
+  const progressDesc = document.getElementById("zipProgressDesc");
+  const progressCurrent = document.getElementById("zipProgressCurrent");
+  const progressPercent = document.getElementById("zipProgressPercent");
+  const progressIcon = document.getElementById("zipProgressIcon");
+
+  if (progressModal) {
+    progressModal.style.display = "flex";
+    if (progressBar) progressBar.style.width = "2%";
+    if (progressCurrent) progressCurrent.textContent = "Iniciando processo...";
+    if (progressPercent) progressPercent.textContent = "2%";
   }
 
   const zip = new JSZip();
   const folder = zip.folder("Artesio_30_Telas_TCC");
 
-  showToast("Iniciando pacote com as 30 telas em lote... Aguarde sem fechar a aba.");
-
-  // Cria relatório consolidado em texto na pasta
   let catalogoGeralTxt = "==============================================================================\n";
   catalogoGeralTxt += "ARTESIO — CATÁLOGO GERAL DAS 30 TELAS (25 MVP + 5 TRABALHOS FUTUROS)\n";
   catalogoGeralTxt += "Documento Oficial de Alinhamento: Artesio — Análise das telas (MVP e futuras)\n";
   catalogoGeralTxt += "==============================================================================\n\n";
 
-  for (let i = 1; i <= ARTESIO_SCREENS.length; i++) {
-    const s = ARTESIO_SCREENS.find(item => item.num === i);
-    if (!s) continue;
+  try {
+    for (let i = 1; i <= ARTESIO_SCREENS.length; i++) {
+      const s = ARTESIO_SCREENS.find(item => item.num === i);
+      if (!s) continue;
 
-    showToast(`Capturando [${s.num_str}/30]: ${s.title}...`);
+      const pct = Math.round((i / ARTESIO_SCREENS.length) * 90);
+      if (progressBar) progressBar.style.width = `${pct}%`;
+      if (progressPercent) progressPercent.textContent = `${pct}%`;
+      if (progressCurrent) progressCurrent.textContent = `Capturando Tela ${s.num_str} de 30: ${s.title}`;
 
-    navigateToScreen(s.num);
-    await new Promise(r => setTimeout(r, 650));
+      navigateToScreen(s.num);
+      await new Promise(r => setTimeout(r, 600));
 
-    const canvas = await captureScreenCanvas(s.num);
-    if (canvas) {
-      // Converte canvas para blob base64 sem cabeçalho
-      const dataUrl = canvas.toDataURL("image/png");
-      const base64Data = dataUrl.replace(/^data:image\/png;base64,/, "");
+      const canvas = await captureScreenCanvas(s.num);
+      if (canvas) {
+        const dataUrl = canvas.toDataURL("image/png");
+        const base64Data = dataUrl.replace(/^data:image\/png;base64,/, "");
 
-      const safeTitle = s.title.replace(/[^a-zA-Z0-9_-]/g, "_");
-      const imgFileName = `Tela_${s.num_str}_${safeTitle}.png`;
-      const descFileName = `Tela_${s.num_str}_${safeTitle}_DESCRICAO.txt`;
+        const safeTitle = s.title.replace(/[^a-zA-Z0-9_-]/g, "_");
+        const imgFileName = `Tela_${s.num_str}_${safeTitle}.png`;
+        const descFileName = `Tela_${s.num_str}_${safeTitle}_DESCRICAO.txt`;
 
-      // Adiciona PNG no ZIP
-      folder.file(imgFileName, base64Data, { base64: true });
+        // Adiciona PNG no ZIP
+        folder.file(imgFileName, base64Data, { base64: true });
 
-      // Adiciona TXT com descrição completa da tela
-      const telaDescTxt = 
+        // Adiciona TXT com descrição completa da tela
+        const telaDescTxt = 
 `==============================================================================
 TELA ${s.num_str}: ${s.title.toUpperCase()}
 ==============================================================================
@@ -915,30 +941,60 @@ ${s.elements}
 ==============================================================================
 Artesio — Plataforma de Arte Física Universitária Independente
 `;
-      folder.file(descFileName, telaDescTxt);
+        folder.file(descFileName, telaDescTxt);
 
-      catalogoGeralTxt += `------------------------------------------------------------------------------\n`;
-      catalogoGeralTxt += `TELA ${s.num_str}: ${s.title} [${s.scope}]\n`;
-      catalogoGeralTxt += `Área: ${s.area}\n`;
-      catalogoGeralTxt += `Requisitos: ${s.rf} | Regras: ${s.rn}\n`;
-      catalogoGeralTxt += `Descrição: ${s.desc}\n`;
-      catalogoGeralTxt += `Elementos: ${s.elements}\n\n`;
+        catalogoGeralTxt += `------------------------------------------------------------------------------\n`;
+        catalogoGeralTxt += `TELA ${s.num_str}: ${s.title} [${s.scope}]\n`;
+        catalogoGeralTxt += `Área: ${s.area}\n`;
+        catalogoGeralTxt += `Requisitos: ${s.rf} | Regras: ${s.rn}\n`;
+        catalogoGeralTxt += `Descrição: ${s.desc}\n`;
+        catalogoGeralTxt += `Elementos: ${s.elements}\n\n`;
+      }
     }
+
+    folder.file("00_CATALOGO_GERAL_30_TELAS.txt", catalogoGeralTxt);
+
+    if (progressBar) progressBar.style.width = "95%";
+    if (progressPercent) progressPercent.textContent = "95%";
+    if (progressCurrent) progressCurrent.textContent = "Compactando arquivo ZIP final...";
+    if (progressDesc) progressDesc.textContent = "Gerando o arquivo compactado para download imediato...";
+
+    const content = await zip.generateAsync({ type: "blob" });
+
+    if (progressBar) progressBar.style.width = "100%";
+    if (progressPercent) progressPercent.textContent = "100%";
+    if (progressTitle) progressTitle.textContent = "✓ Pasta ZIP Pronta!";
+    if (progressIcon) progressIcon.textContent = "🎉";
+    if (progressCurrent) progressCurrent.textContent = "Download concluído!";
+    if (progressDesc) progressDesc.textContent = "O arquivo Artesio_30_Telas_Completas_TCC.zip foi enviado para seus Downloads.";
+
+    // Dispara download via Blob URL
+    const downloadUrl = URL.createObjectURL(content);
+    const downloadLink = document.createElement("a");
+    downloadLink.href = downloadUrl;
+    downloadLink.download = "Artesio_30_Telas_Completas_TCC.zip";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    setTimeout(() => {
+      document.body.removeChild(downloadLink);
+      URL.revokeObjectURL(downloadUrl);
+    }, 1000);
+
+    // Fecha modal de progresso após 3 segundos
+    setTimeout(() => {
+      if (progressModal) progressModal.style.display = "none";
+      // Restaura barra
+      if (progressBar) progressBar.style.width = "0%";
+      if (progressTitle) progressTitle.textContent = "Gerando Pasta ZIP das 30 Telas";
+      if (progressIcon) progressIcon.textContent = "📦";
+      showToast("✓ Arquivo Artesio_30_Telas_Completas_TCC.zip salvo em seus Downloads!");
+    }, 3500);
+
+  } catch (err) {
+    console.error("Erro ao gerar ZIP das 30 telas:", err);
+    alert("Ocorreu um erro ao gerar o arquivo ZIP. Verifique o console do navegador.");
+    if (progressModal) progressModal.style.display = "none";
   }
-
-  folder.file("00_CATALOGO_GERAL_30_TELAS.txt", catalogoGeralTxt);
-
-  showToast("Compactando pasta ZIP de alta resolução...");
-
-  const content = await zip.generateAsync({ type: "blob" });
-  const downloadLink = document.createElement("a");
-  downloadLink.href = URL.createObjectURL(content);
-  downloadLink.download = "Artesio_30_Telas_Completas_TCC.zip";
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
-  document.body.removeChild(downloadLink);
-
-  showToast("✓ Pasta ZIP baixada com sucesso com todas as 30 telas e descrições!");
 };
 
 // ==========================================================================
